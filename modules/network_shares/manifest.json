@@ -1,0 +1,35 @@
+{
+  "id": "com.240mp.network_shares",
+  "platforms": ["android"],
+  "name": "Network Shares",
+  "icon": "assets/images/logo.svg",
+  "entry_point_qml": "views/Root.qml",
+  "settings": [
+    {
+      "key": "enabled",
+      "label": "ENABLED",
+      "type": "toggle",
+      "default": "ON"
+    },
+    {
+      "key": "resume_playback",
+      "label": "Resume Playback",
+      "type": "list_single",
+      "options": ["Ask", "Always", "Never"],
+      "default": "Ask"
+    },
+    {
+      "key": "hide_extensions",
+      "label": "Hide File Extensions",
+      "type": "toggle",
+      "default": "OFF"
+    },
+    {
+      "key": "forget_server",
+      "label": "Forget Server",
+      "type": "action",
+      "action_slot": "forgetServer",
+      "requires_auth": true
+    }
+  ]
+}

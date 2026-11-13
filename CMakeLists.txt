@@ -80,6 +80,7 @@ if(ANDROID)
         ${MP240_SOURCES}
         src/player/AndroidPlayerController.cpp
         src/modules/exercise/ExerciseBackend.cpp
+        src/modules/network_shares/NetworkSharesBackend.cpp
         src/platform/android/AppBundle.cpp
     )
     mp240_configure_android(240mp)

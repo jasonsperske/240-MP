@@ -20,6 +20,8 @@ Android follows the desktop's design: the shell browses, then hands off to a ded
 | `MainActivity`, `TouchPad.qml` | `android/src/...`, `views/Components/` | Input. The tablet is touch-only, so an on-screen pad taps the same keys a gamepad would (`inputManager.tapKey`). Bluetooth gamepads and remotes are mapped to the keys the views already handle. |
 | `AppBundle` | `src/platform/android/` | The QML, modules and assets ship inside the APK as Qt resources and are mirrored to app storage at startup, so `appRoot` is an ordinary directory, as on the desktop. |
 
+**Network Shares** (`modules/network_shares/`, `src/modules/network_shares/`, `android/src/com/mp240/android/smb/`) browses and plays videos straight from an SMB 2/3 share on a NAS or computer, signed in with a username and password. See [Network shares (SMB)](#network-shares-smb).
+
 Modules that need things Android lacks declare `"platforms": ["linux", "macos"]` in their manifest and are not loaded or built there: NFC Reader (PC/SC, USB serial), Scripts (a VT), YouTube (yt-dlp), Weather (mpv for music, `QtQuick.Effects`). The exercise module declares `["android"]`.
 
 Qt 6.4 predates `QtQuick.Effects`, so `views/Components/+android/AppBar.qml` (picked by Qt's file selector on Android) tints the icon with Qt5Compat's `ColorOverlay` instead of `MultiEffect`. Keep the two `AppBar.qml` files in step.
@@ -66,6 +68,26 @@ The HUD draws the workout's profile across the top of the screen, with resistanc
 ### Trying it without a bike
 
 Turn on **Simulated Bike** in the exercise module's settings. The player then uses a stand-in bike that starts 5 above the difficulty's base: **UP/DOWN** change its cadence by 5 rpm, **PAGE UP/PAGE DOWN** (or `]` / `[`) its resistance by 5.
+
+## Network shares (SMB)
+
+Android 7 can't mount an SMB share without root, so the app speaks SMB itself, with [smbj](https://github.com/hierynomus/smbj) (Apache-2.0):
+
+- **Setup.** Open **Network Shares**. Enter the server (`nas.local`, `192.168.1.20`, or `host:port` for a non-standard port), the share name, the username and the password; Domain is usually blank. Tap a field for the keyboard, or move with the pad or a remote. **Connect** signs in and saves only if that works. Later, press LEFT at the share's top folder to change any of it. **Settings → Network Shares → Forget Server** clears it.
+- **Browsing.** Folders, then video and audio files. Hidden and system entries are left out. Subtitle files named after a video (`Movie.srt`, `Movie.en.srt`) aren't listed; they're loaded with it.
+- **Playback** streams straight from the share, with no copy to the tablet. `smb://` addresses go through `SmbDataSource`, a seekable Media3 data source with 1 MiB read-ahead, so exercise mode, the HUD and resume all work as for any other video. Resume positions are kept per file (**Resume Playback**: Ask, Always or Never).
+- **Connections.** One SMB session is kept open and shared by the browser and the player. If the NAS drops it (reboot, sleep, Wi-Fi), the next request reconnects once on its own, within about 10 s. If the server can't be reached, the folder shows why, and OK retries.
+- **Credentials** are stored in `config.json` in the app's private storage, as Plex's and Jellyfin's tokens are.
+- **SMB 2.0.2 to 3.1.1.** SMB1 isn't supported. Android's crypto has no MD4 (needed for NTLM), so smbj uses its BouncyCastle provider.
+
+**Build notes.** smbj and its dependencies are newer than the 2022 toolchain Qt 6.4 pins. AGP 7.2's own dexer crashes on their enum classes, so `android/build.gradle` puts R8 8.2.47 ahead of AGP on the buildscript classpath. Core-library desugaring is on, because smbj refers to `java.time`, which Android 7 lacks.
+
+**Tested** on the emulator against Samba 4.17 (Debian) on a non-standard port, which negotiated SMB 3.1.1 with signing:
+- sign-in, and a wrong password;
+- browsing, and the file filter;
+- MKV playback with a sidecar `.srt`;
+- seeking and resume;
+- the server going away and coming back (the automatic reconnect, and RETRY).
 
 ## Building
 
@@ -135,6 +157,7 @@ adb shell am start -n com.mp240.app/dev.soloton.bike.BikeDiagnosticsActivity
 
 - **Player.** mpv-only options are ignored on Android: the OSC mode, image slideshows (`imageContent`), extra mpv arguments and the transcode-offset display. Subtitle and audio cycle requests from mpv's OSC don't apply, because ExoPlayer's own controls switch tracks.
 - **Modules.** NFC Reader, Scripts, YouTube and Weather aren't available on Android.
+- **Network shares.** SMB2/3 only, one share at a time, and no server discovery: you type the address.
 - **Resistance** is the bike library's spike-filtered value. soloton has not yet checked it on a real bike.
 
 **Emulator rendering.** If the emulator falls back to software GL (its log says `Switching to software rendering`), Qt Quick draws a diagonal tear across highlighted rows and the AppBar icon is blank. Start the emulator with `-gpu host` instead; on a GPU both draw correctly.

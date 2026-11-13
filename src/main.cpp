@@ -28,6 +28,7 @@
 // the exercise module runs the bike. NFC, Scripts, YouTube and Weather need PC/SC, a VT,
 // yt-dlp or mpv, so their manifests keep them off Android and they are not built here.
 #include "modules/exercise/ExerciseBackend.h"
+#include "modules/network_shares/NetworkSharesBackend.h"
 #include "player/AndroidPlayerController.h"
 #include "platform/android/AppBundle.h"
 #else
@@ -169,6 +170,7 @@ int main(int argc, char *argv[]) {
     AmbientModeBackend  ambientMode(dataRoot);
 #ifdef Q_OS_ANDROID
     ExerciseBackend     exerciseBackend;
+    NetworkSharesBackend networkShares(dataRoot, &appCore);
     // Same QML name and surface as MpvController, so module Player views are unchanged.
     AndroidPlayerController mpvController(appRoot, &appCore);
 #else
@@ -205,6 +207,7 @@ int main(int argc, char *argv[]) {
     appCore.registerModule("com.240mp.ambient_mode", "ambientModeBackend", &ambientMode, ctx);
 #ifdef Q_OS_ANDROID
     appCore.registerModule("com.240mp.exercise",     "exerciseBackend",    &exerciseBackend, ctx);
+    appCore.registerModule("com.240mp.network_shares", "networkSharesBackend", &networkShares, ctx);
 #else
     appCore.registerModule("com.240mp.nfc_reader",   "nfcReaderBackend",   &nfcReader,   ctx);
     appCore.registerModule("com.240mp.youtube",      "youtubeBackend",     &youtubeBackend, ctx);

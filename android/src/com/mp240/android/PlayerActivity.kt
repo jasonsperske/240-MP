@@ -29,6 +29,7 @@ import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.ui.PlayerView
+import com.mp240.android.smb.SmbOrDefaultDataSource
 import com.mp240.exercise.Program
 import com.mp240.exercise.RideGate
 import dev.soloton.bike.BikePaceSource
@@ -147,7 +148,8 @@ class PlayerActivity : Activity() {
         val http = DefaultHttpDataSource.Factory()
             .setAllowCrossProtocolRedirects(true)
             .setDefaultRequestProperties(request.headers)
-        val sources = DefaultMediaSourceFactory(DefaultDataSource.Factory(this, http))
+        // smb:// (the Network Shares module) streams from the share; everything else as before.
+        val sources = DefaultMediaSourceFactory(SmbOrDefaultDataSource.Factory(DefaultDataSource.Factory(this, http)))
         val player = ExoPlayer.Builder(this).setMediaSourceFactory(sources).build()
 
         val items = request.urls.mapIndexed { i, url ->
