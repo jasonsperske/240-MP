@@ -4,7 +4,7 @@
 
 The bike's sensors are read with [soloton](https://github.com/jasonsperske/soloton)'s bike library, vendored the same way [ExerDoom](https://github.com/jasonsperske/ExerDoom) vendors it.
 
-> **Status:** the workout logic is unit tested (23 JVM tests). The Android Kotlin sources compile against Media3, the bike library and Qt 6.4's Java bindings. The C++ compiles with the NDK against Qt 6.4's Android headers, and the new QML passes `qmllint` and renders under Qt 6.4. The APK has not yet been built end to end, or run on an emulator or a bike (see [Not yet verified](#not-yet-verified)).
+> **Status:** builds into an APK (arm64-v8a + armeabi-v7a for the bike, x86_64 for the emulator) and runs on an Android 7.0 (API 24) emulator shaped like the gen 1 tablet. On the emulator, the menus, touch pad, Ride Check, playback and the whole ride gate were exercised with the simulated bike: waiting to start, the 3 s grace, the hold, resuming, the 10 s ramp, and the NEXT warning. So were the no-bike path and the hand-back to the shell (the resume position comes back). Not yet tried on a real bike (see [Not yet verified](#not-yet-verified)).
 
 ## How it fits together
 
@@ -90,16 +90,18 @@ Qt 6.4's Android template pins **Gradle 7.4.2 and AGP 7.2.1**; `android/build.gr
 
 ```bash
 . ~/.local/share/soloton-toolchain/env.sh          # JAVA_HOME, ANDROID_HOME
-~/Qt/6.4.3/android_arm64_v8a/bin/qt-cmake -G Ninja -B build-android -S . \
+# The bike: arm64-v8a (its MT8173), plus armeabi-v7a as a fallback, in one APK.
+~/Qt/6.4.3/android_arm64_v8a/bin/qt-cmake -G Ninja -B build-android-bike -S . \
     -DANDROID_SDK_ROOT=$ANDROID_HOME \
     -DANDROID_NDK_ROOT=$ANDROID_HOME/ndk/23.1.7779620 \
     -DQT_HOST_PATH=$HOME/Qt/6.4.3/gcc_64 \
+    -DQT_ANDROID_ABIS="arm64-v8a;armeabi-v7a" \
     -DMP240_ANDROID_OPENSSL_DIR=/path/to/android_openssl/ssl_1.1 \
     -DCMAKE_BUILD_TYPE=Release
-cmake --build build-android --target apk
+cmake --build build-android-bike --target apk
 ```
 
-The APK lands in `build-android/android-build/build/outputs/apk/`. Use the `android_x86_64` kit's `qt-cmake` for soloton's gen 1 emulator (`scripts/gen1-emulator.sh` there). To build several ABIs into one APK, add `-DQT_ANDROID_BUILD_ALL_ABIS=ON` (or `-DQT_ANDROID_ABIS="arm64-v8a;armeabi-v7a"`). The bike's MT8173 is arm64-v8a.
+The APK is `build-android-bike/android-build/240mp.apk`, signed with the debug key, which is fine for sideloading. For soloton's gen 1 emulator (`scripts/gen1-emulator.sh` there), configure a separate build directory with the `android_x86_64` kit's `qt-cmake` and leave out `QT_ANDROID_ABIS`. Use the SDK's CMake (`$ANDROID_HOME/cmake/3.31.6/bin`, which also has `ninja`); it's closer to what Qt 6.4 was tested with than CMake 4.
 
 For an update to install over the previous APK, raise `-DMP240_ANDROID_VERSION_CODE` and sign every build with the same key.
 
@@ -116,7 +118,7 @@ This runs the exercise-core unit tests and compiles the vendored bike library on
 Sideload as for soloton's apps (for example with [OpenPelo](https://github.com/doudar/Openpelo)), or over adb:
 
 ```bash
-adb install -r build-android/android-build/build/outputs/apk/release/android-build-release-signed.apk
+adb install -r build-android-bike/android-build/240mp.apk
 ```
 
 Copy videos for **Local Files** to the tablet's shared storage (for example `/sdcard/Movies`) and point the module's media directory at them. The app asks for storage access on first launch.
@@ -135,7 +137,10 @@ adb shell am start -n com.mp240.app/dev.soloton.bike.BikeDiagnosticsActivity
 - **Modules.** NFC Reader, Scripts, YouTube and Weather aren't available on Android.
 - **Resistance** is the bike library's spike-filtered value. soloton has not yet checked it on a real bike.
 
+**Emulator rendering.** If the emulator falls back to software GL (its log says `Switching to software rendering`), Qt Quick draws a diagonal tear across highlighted rows and the AppBar icon is blank. Start the emulator with `-gpu host` instead; on a GPU both draw correctly.
+
 ## Not yet verified
 
-- An end-to-end `apk` build. The C++ was syntax-checked with the NDK against Qt 6.4's Android headers, but with the host's OpenSSL 3 headers in place of the 1.1 ones the APK links. Plex's Ed25519 code uses APIs OpenSSL 1.1.1 has, but it hasn't been compiled against 1.1.
-- The app on soloton's gen 1 emulator, and on a real bike.
+- **A real bike:** that the sensor service connects on its Android 7 firmware, and that the cadence and resistance units match (soloton's library is verified on one bike, but not its resistance).
+- **Plex, Jellyfin and Emby streams** through ExoPlayer, including HTTPS through the bundled OpenSSL 1.1 and Plex sign-in. Only local files were played on the emulator.
+- **A Bluetooth gamepad or remote** on the tablet.

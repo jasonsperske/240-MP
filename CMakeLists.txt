@@ -169,7 +169,9 @@ if(APPLE AND NOT DEFINED ENV{CI})
 endif()
 
 # ── Install rules ──────────────────────────────────────────────────────────────
-if(APPLE)
+if(ANDROID)
+    # Nothing to install: the APK (cmake --build ... --target apk) is the deliverable.
+elseif(APPLE)
     install(TARGETS 240mp BUNDLE DESTINATION . COMPONENT Runtime)
 
     # Use a hardcoded relative path — $<TARGET_BUNDLE_CONTENT_DIR> resolves to

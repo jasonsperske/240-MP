@@ -86,9 +86,10 @@ class RideHud(context: Context, val typeface: Typeface) : View(context) {
     private fun drawPanel(canvas: Canvas, s: RideGate.Status, p: Program, u: Float) {
         val left = 2f * u
         val top = 7.5f * u
-        val w = 46f * u
-        val lines = if (showNext(s)) 6 else 5
-        val h = (3f + lines * 5f) * u
+        val w = 58f * u
+        // Mode, segment, RPM, RES, and NEXT when it is coming up; 5.5u a line plus padding.
+        val lines = if (showNext(s)) 5 else 4
+        val h = (7f + (lines - 1) * 5.5f) * u
         fill.color = PANEL
         rect.set(left, top, left + w, top + h)
         canvas.drawRect(rect, fill)
@@ -141,8 +142,9 @@ class RideHud(context: Context, val typeface: Typeface) : View(context) {
         val label = String.format("%s %3d / %d", name, Math.round(value), target)
         canvas.drawText(label, x, y, text)
 
-        val barX = x + 25f * u
-        val barW = w - 25f * u
+        // Clear of the widest label, "RPM 120 / 120".
+        val barX = x + 31f * u
+        val barW = w - 31f * u
         val barY = y - 2.6f * u
         val barH = 2.4f * u
         val scale = max(target * 1.5f, 1f)
