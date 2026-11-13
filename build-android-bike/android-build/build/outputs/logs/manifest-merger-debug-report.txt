@@ -33,7 +33,7 @@ INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidMan
 		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
 		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
 	android:versionName
-		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:10:5-30
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:10:5-48
 		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
 		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
 	xmlns:android

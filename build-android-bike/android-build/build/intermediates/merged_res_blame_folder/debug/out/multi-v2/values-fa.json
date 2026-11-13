@@ -57,13 +57,13 @@
                     }
                 },
                 {
-                    "source": "/home/jason/Qt/6.4.3/android_arm64_v8a/src/android/java/res/values-fa/strings.xml",
+                    "source": "/home/jason/Qt/6.4.3/android_armv7/src/android/java/res/values-fa/strings.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
-                        "startOffsets": "55,169",
+                        "startOffsets": "57,172",
                         "endColumns": "113,92",
-                        "endOffsets": "164,257"
+                        "endOffsets": "166,260"
                     },
                     "to": {
                         "startLines": "70,72",

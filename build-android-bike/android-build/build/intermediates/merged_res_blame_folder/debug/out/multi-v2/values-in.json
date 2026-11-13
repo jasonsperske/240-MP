@@ -4,13 +4,13 @@
             "outputFile": "com.mp240.app-mergeDebugResources-13:/values-in/values-in.xml",
             "map": [
                 {
-                    "source": "/home/jason/Qt/6.4.3/android_arm64_v8a/src/android/java/res/values-in/strings.xml",
+                    "source": "/home/jason/Qt/6.4.3/android_armv7/src/android/java/res/values-in/strings.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
-                        "startOffsets": "55,168",
+                        "startOffsets": "57,171",
                         "endColumns": "112,89",
-                        "endOffsets": "163,253"
+                        "endOffsets": "165,256"
                     },
                     "to": {
                         "startLines": "70,72",

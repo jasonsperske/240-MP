@@ -7,7 +7,7 @@
     package="com.mp240.app"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="dev">
+    android:versionName="peloton-android-0.1.0">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

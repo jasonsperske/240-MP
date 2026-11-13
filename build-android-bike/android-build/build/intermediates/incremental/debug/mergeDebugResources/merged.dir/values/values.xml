@@ -14,21 +14,10 @@
     <item>2x</item>
   </string-array>
     <array name="load_local_libs">
-        <item>armeabi-v7a;libplugins_platforms_qtforandroid_armeabi-v7a.so</item>
         <item>arm64-v8a;libplugins_platforms_qtforandroid_arm64-v8a.so</item>
+        <item>armeabi-v7a;libplugins_platforms_qtforandroid_armeabi-v7a.so</item>
     </array>
     <array name="qt_libs">
-        <item>armeabi-v7a;c++_shared</item>
-        <item>armeabi-v7a;Qt6Core_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6Gui_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6Network_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6OpenGL_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6Qml_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6QmlModels_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6Quick_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6Svg_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6QmlWorkerScript_armeabi-v7a</item>
-        <item>armeabi-v7a;Qt6ShaderTools_armeabi-v7a</item>
         <item>arm64-v8a;c++_shared</item>
         <item>arm64-v8a;Qt6Core_arm64-v8a</item>
         <item>arm64-v8a;Qt6Gui_arm64-v8a</item>
@@ -40,6 +29,17 @@
         <item>arm64-v8a;Qt6Svg_arm64-v8a</item>
         <item>arm64-v8a;Qt6QmlWorkerScript_arm64-v8a</item>
         <item>arm64-v8a;Qt6ShaderTools_arm64-v8a</item>
+        <item>armeabi-v7a;c++_shared</item>
+        <item>armeabi-v7a;Qt6Core_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6Gui_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6Network_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6OpenGL_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6Qml_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6QmlModels_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6Quick_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6Svg_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6QmlWorkerScript_armeabi-v7a</item>
+        <item>armeabi-v7a;Qt6ShaderTools_armeabi-v7a</item>
     </array>
     <attr format="color" name="ad_marker_color"/>
     <attr format="dimension" name="ad_marker_width"/>

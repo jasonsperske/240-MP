@@ -7,7 +7,7 @@
     package="com.mp240.app"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="dev" >
+    android:versionName="peloton-android-0.1.0" >
 
     <uses-sdk
         android:minSdkVersion="24"

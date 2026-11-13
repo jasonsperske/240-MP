@@ -40,23 +40,6 @@
                     }
                 },
                 {
-                    "source": "/home/jason/Qt/6.4.3/android_arm64_v8a/src/android/java/res/values-fr/strings.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,173",
-                        "endColumns": "117,102",
-                        "endOffsets": "168,271"
-                    },
-                    "to": {
-                        "startLines": "70,72",
-                        "startColumns": "4,4",
-                        "startOffsets": "4623,4842",
-                        "endColumns": "117,102",
-                        "endOffsets": "4736,4940"
-                    }
-                },
-                {
                     "source": "/home/jason/.gradle/caches/transforms-3/f9a54c86eb2d60693aa1d611f9ec6084/transformed/media3-exoplayer-1.1.1/res/values-fr/values-fr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
@@ -71,6 +54,23 @@
                         "startOffsets": "2766,2840,2905,2974,3046,3129,3206,3303,3396",
                         "endColumns": "73,64,68,71,82,76,96,92,82",
                         "endOffsets": "2835,2900,2969,3041,3124,3201,3298,3391,3474"
+                    }
+                },
+                {
+                    "source": "/home/jason/Qt/6.4.3/android_armv7/src/android/java/res/values-fr/strings.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "57,176",
+                        "endColumns": "117,102",
+                        "endOffsets": "170,274"
+                    },
+                    "to": {
+                        "startLines": "70,72",
+                        "startColumns": "4,4",
+                        "startOffsets": "4623,4842",
+                        "endColumns": "117,102",
+                        "endOffsets": "4736,4940"
                     }
                 }
             ]

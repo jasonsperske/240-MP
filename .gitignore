@@ -10,7 +10,7 @@ Thumbs.db
 # 240-MP #
 ######################
 /build
-/build-android
+/build-android*
 /.cache
 # AppImage build outputs (scripts/build-appimage.sh, scripts/build-mpv.sh)
 /AppDir

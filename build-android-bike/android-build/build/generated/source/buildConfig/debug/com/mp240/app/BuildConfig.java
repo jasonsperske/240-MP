@@ -8,5 +8,5 @@ public final class BuildConfig {
   public static final String APPLICATION_ID = "com.mp240.app";
   public static final String BUILD_TYPE = "debug";
   public static final int VERSION_CODE = 1;
-  public static final String VERSION_NAME = "dev";
+  public static final String VERSION_NAME = "peloton-android-0.1.0";
 }

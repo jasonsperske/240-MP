@@ -12,7 +12,7 @@
       "filters": [],
       "attributes": [],
       "versionCode": 1,
-      "versionName": "dev",
+      "versionName": "peloton-android-0.1.0",
       "outputFile": "AndroidManifest.xml"
     }
   ],

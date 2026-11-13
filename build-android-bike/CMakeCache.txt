@@ -36,7 +36,7 @@ ANDROID_SDK_ROOT:UNINITIALIZED=/home/jason/.local/share/soloton-toolchain/androi
 ANDROID_STL:STRING=c++_shared
 
 //Release version (CI passes the git tag)
-APP_VERSION:STRING=dev
+APP_VERSION:STRING=peloton-android-0.1.0
 
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-addr2line

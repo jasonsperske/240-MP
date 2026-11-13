@@ -13,7 +13,7 @@
    "android-extra-libs" : "/tmp/claude-1000/-home-jason-dev-240-MP/e981790e-f2ae-49a7-87f7-b43f944169d0/scratchpad/kdab/android_openssl/ssl_1.1/arm64-v8a/libcrypto_1_1.so,/tmp/claude-1000/-home-jason-dev-240-MP/e981790e-f2ae-49a7-87f7-b43f944169d0/scratchpad/kdab/android_openssl/ssl_1.1/arm64-v8a/libssl_1_1.so",
    "android-package-source-directory": "/home/jason/dev/240-MP/android",
    "android-version-code": "1",
-   "android-version-name": "dev",
+   "android-version-name": "peloton-android-0.1.0",
    "android-min-sdk-version": "24",
    "android-target-sdk-version": "31",
    "application-binary": "240mp",
