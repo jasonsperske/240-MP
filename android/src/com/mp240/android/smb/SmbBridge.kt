@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package com.mp240.android.smb
 
-import android.util.Log
 import com.hierynomus.msfscc.FileAttributes
 import org.json.JSONArray
 import org.json.JSONObject
@@ -14,7 +13,6 @@ import java.util.concurrent.Executors
  * through a `native*` method, registered by C++, carrying the request's id.
  */
 object SmbBridge {
-    private const val TAG = "240mp.smb"
     private val worker = Executors.newSingleThreadExecutor { r -> Thread(r, "240mp-smb").apply { isDaemon = true } }
 
     /** File types the browser shows; subtitles are attached to their video instead of listed. */
@@ -36,10 +34,24 @@ object SmbBridge {
         worker.execute {
             val cfg = ShareConfig.fromJson(json)
             val result = runCatching { SmbConnections.test(cfg) }
-            result.exceptionOrNull()?.let { Log.w(TAG, "sign-in to ${cfg.host}/${cfg.share} failed", it) }
+            result.exceptionOrNull()?.let { SmbLog.failure("Sign-in test failed: ${SmbConnections.describe(it, cfg)}", it) }
             nativeTestResult(requestId, result.isSuccess, result.exceptionOrNull()?.let { SmbConnections.describe(it, cfg) } ?: "")
         }
     }
+
+    /**
+     * Checks the share in [json] step by step (see [SmbConnections.diagnose]) on the SMB thread;
+     * the steps appear in [logText] as they happen.
+     */
+    @JvmStatic
+    fun diagnose(json: String) {
+        val cfg = runCatching { ShareConfig.fromJson(json) }.getOrNull() ?: return
+        worker.execute { SmbConnections.diagnose(cfg) }
+    }
+
+    /** The network-share log for the diagnostics screen, newest last. */
+    @JvmStatic
+    fun logText(): String = SmbLog.text()
 
     /**
      * Lists the folder [path] ("" for the share's top, "/" separated) of the configured share;
@@ -53,7 +65,7 @@ object SmbBridge {
             val json = try {
                 listing(path.trim('/'))
             } catch (e: Exception) {
-                Log.w(TAG, "listing \"$path\" failed", e)
+                SmbLog.failure("Listing \"/$path\" failed: ${SmbConnections.describe(e)}", e)
                 JSONObject().put("ok", false).put("error", SmbConnections.describe(e)).toString()
             }
             nativeListResult(requestId, json)
