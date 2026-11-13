@@ -135,6 +135,27 @@ void NetworkSharesBackend::onListResult(int requestId, const QString &json) {
     emit folderListed(requestId, path, o.value("items").toArray().toVariantList(), QString());
 }
 
+void NetworkSharesBackend::runDiagnostics(const QString &host, const QString &share, const QString &username,
+                                          const QString &password, const QString &domain) {
+    // No server given (from the folder browser): check the saved settings as they are.
+    const Server s = host.trimmed().isEmpty()
+        ? savedServer()
+        : parse(host, share, username, password.isEmpty() ? savedServer().password : password, domain);
+    QJniObject::callStaticMethod<void>(kBridge, "diagnose", "(Ljava/lang/String;)V",
+                                       QJniObject::fromString(toJson(s)).object<jstring>());
+    QJniEnvironment env;
+    if (env.checkAndClearExceptions())
+        qWarning("[NetworkShares] SmbBridge.diagnose failed");
+}
+
+QString NetworkSharesBackend::diagnosticsLog() const {
+    const QJniObject text = QJniObject::callStaticObjectMethod(kBridge, "logText", "()Ljava/lang/String;");
+    QJniEnvironment env;
+    if (env.checkAndClearExceptions() || !text.isValid())
+        return QString();
+    return text.toString();
+}
+
 QString NetworkSharesBackend::mediaUrl(const QString &path) const {
     const Server s = savedServer();
     QUrl url;

@@ -46,6 +46,14 @@ public:
     Q_INVOKABLE QString mediaUrl(const QString &path) const;
     Q_INVOKABLE QStringList mediaUrls(const QStringList &paths) const;
 
+    // Diagnostics: checks these settings one step at a time (look up the server, TCP, SMB
+    // negotiate, sign in, open the share) in the background, writing each step to the log.
+    // An empty host checks the saved settings; otherwise an empty password means the saved one.
+    Q_INVOKABLE void runDiagnostics(const QString &host, const QString &share, const QString &username,
+                                    const QString &password, const QString &domain);
+    // The network-share log (lookups, connections, failures, diagnostics), newest last.
+    Q_INVOKABLE QString diagnosticsLog() const;
+
     // Resume positions, keyed by share and path.
     Q_INVOKABLE QVariantMap getSavedPosition(const QString &path) const;
     Q_INVOKABLE void savePosition(const QString &path, int positionMs);

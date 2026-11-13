@@ -77,6 +77,15 @@ Android 7 can't mount an SMB share without root, so the app speaks SMB itself, w
 - **Browsing.** Folders, then video and audio files. Hidden and system entries are left out. Subtitle files named after a video (`Movie.srt`, `Movie.en.srt`) aren't listed; they're loaded with it.
 - **Playback** streams straight from the share, with no copy to the tablet. `smb://` addresses go through `SmbDataSource`, a seekable Media3 data source with 1 MiB read-ahead, so exercise mode, the HUD and resume all work as for any other video. Resume positions are kept per file (**Resume Playback**: Ask, Always or Never).
 - **Connections.** One SMB session is kept open and shared by the browser and the player. If the NAS drops it (reboot, sleep, Wi-Fi), the next request reconnects once on its own, within about 10 s. If the server can't be reached, the folder shows why, and OK retries.
+- **`.local` names.** Android 7's resolver can't look up `.local` names (`tower.local`, `nas.local`); Android only learned mDNS in Android 12. So when DNS can't find a `.local` name (or a bare name like `TOWER`, tried as `TOWER.local`), the app asks with multicast DNS itself (`MdnsResolver`). It uses a legacy unicast query to 224.0.0.251:5353 on every interface, so the answer comes straight back and no Wi-Fi multicast lock is needed. Answers are cached for 10 minutes. An IP address always works too.
+- **Diagnostics.** **Diagnose** on the setup screen, or RIGHT (►) when a folder won't open, checks the settings one step at a time and shows where they fail:
+  1. look up the name (DNS, then mDNS);
+  2. TCP connect to the port;
+  3. SMB negotiate (dialect, signing);
+  4. sign in (it also flags when the server only let it in as a guest);
+  5. open and list the share.
+
+  The screen also shows the network-share log from this run of the app: lookups, connections, reconnects, and failed listings or playback, each with its exception chain. The log is held in memory (`SmbLog`, the last 400 lines) and copied to logcat under `240mp.smb`.
 - **Credentials** are stored in `config.json` in the app's private storage, as Plex's and Jellyfin's tokens are.
 - **SMB 2.0.2 to 3.1.1.** SMB1 isn't supported. Android's crypto has no MD4 (needed for NTLM), so smbj uses its BouncyCastle provider.
 

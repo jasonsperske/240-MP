@@ -69,6 +69,10 @@ FocusScope {
         } else if ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && errorMsg !== "") {
             load()
             event.accepted = true
+        } else if (event.key === Qt.Key_Right && errorMsg !== "") {
+            // Check the saved settings step by step to see where they fail.
+            navigateTo("Diagnostics.qml", {}, { currentIndex: fileList.currentIndex })
+            event.accepted = true
         } else if (event.key === Qt.Key_Left && folderPath === "" && !loading) {
             // From the share's top, Left opens the server setup (to change share or password).
             navigateTo("Setup.qml", { fromBrowser: true }, { currentIndex: fileList.currentIndex })
@@ -198,7 +202,7 @@ FocusScope {
 
     Text {
         text: errorMsg !== ""
-              ? root.hints.back + ":BACK " + root.hints.select + ":RETRY"
+              ? root.hints.back + ":BACK " + root.hints.select + ":RETRY " + root.hints.browse + ":DIAGNOSE"
               : root.hints.back + ":BACK " + root.hints.navigate + ":NAVIGATE " + root.hints.select + ":SELECT"
                 + (folderPath === "" ? " " + root.hints.change + ":SERVER" : "")
         color: root.tertiaryColor

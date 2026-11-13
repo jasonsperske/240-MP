@@ -14,9 +14,15 @@ import com.hierynomus.smbj.share.DiskShare
 import org.json.JSONObject
 import java.io.IOException
 import java.net.ConnectException
+import java.net.Inet4Address
+import java.net.InetAddress
+import java.net.InetSocketAddress
+import java.net.NetworkInterface
 import java.net.NoRouteToHostException
+import java.net.Socket
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 /** Where the share is and who to sign in as. [port] 445 unless the server field says otherwise. */
@@ -73,6 +79,9 @@ data class SmbLocation(val host: String, val port: Int, val share: String, val p
  *
  * Android's own crypto has no MD4, which NTLM sign-in needs, so smbj is given its BouncyCastle
  * provider.
+ *
+ * Server names are looked up here rather than by smbj, so that `.local` names work (see
+ * [resolve]), and each step is written to [SmbLog] for the diagnostics screen.
  */
 object SmbConnections {
     @Volatile
@@ -110,6 +119,7 @@ object SmbConnections {
             block(share(cfg))
         } catch (e: Exception) {
             if (!isConnectionLoss(e)) throw e
+            SmbLog.add("Connection lost (${SmbLog.causes(e).first()}), reconnecting")
             reset()
             block(share(cfg))
         }
@@ -117,15 +127,149 @@ object SmbConnections {
 
     /** Signs in to [cfg] without disturbing the configured connection; throws with a reason if that fails. */
     fun test(cfg: ShareConfig) {
-        client.connect(cfg.host, cfg.port).use { conn ->
+        SmbLog.add("Sign-in test: ${cfg.describe()}")
+        val address = resolve(cfg.host)
+        client.connect(address, cfg.port).use { conn ->
+            SmbLog.add("Connected to $address:${cfg.port}, ${conn.negotiatedProtocol.dialect}")
             val s = conn.authenticate(AuthenticationContext(cfg.username, cfg.password.toCharArray(), cfg.domain))
+            SmbLog.add("Signed in as ${who(cfg)}${sessionKind(s)}")
             try {
                 (s.connectShare(cfg.share) as? DiskShare ?: throw IOException("\"${cfg.share}\" is not a file share")).use { it.list("") }
+                SmbLog.add("Opened share \"${cfg.share}\"")
             } finally {
                 s.close()
             }
         }
     }
+
+    /**
+     * Checks [cfg] one step at a time (look up the server, open TCP, SMB negotiate, sign in, open
+     * and list the share), writing each step and its outcome to [SmbLog]. Never throws. Doesn't
+     * touch the configured connection.
+     */
+    fun diagnose(cfg: ShareConfig) {
+        val log = SmbLog::add
+        log("===== Diagnose: ${cfg.describe()} =====")
+        log("This device: " + localAddresses().ifEmpty { "no network address (is Wi-Fi on?)" })
+        var step = "1/5 Look up ${cfg.host}"
+        try {
+            log(step)
+            val addresses = lookUp(cfg.host, log)
+            if (addresses.isEmpty()) {
+                log("FAILED at 1/5: can't find a server called ${cfg.host}." +
+                    if (isLocalName(cfg.host)) " Check the name, or enter the server's IP address instead." else
+                        " Try the server's IP address, or its name with .local on the end.")
+                return
+            }
+            val address = addresses.first().hostAddress ?: cfg.host
+
+            step = "2/5 TCP connect to $address:${cfg.port}"
+            log(step)
+            var started = System.currentTimeMillis()
+            Socket().use { it.connect(InetSocketAddress(address, cfg.port), 5000) }
+            log("  open (${System.currentTimeMillis() - started} ms)")
+
+            step = "3/5 SMB negotiate"
+            log(step)
+            started = System.currentTimeMillis()
+            client.connect(address, cfg.port).use { conn ->
+                val ctx = conn.connectionContext
+                log("  ${conn.negotiatedProtocol.dialect}, signing ${if (ctx.isServerRequiresSigning) "required" else "optional"}, " +
+                    "server ${ctx.serverName ?: "?"} (${System.currentTimeMillis() - started} ms)")
+
+                step = "4/5 Sign in as ${who(cfg)}"
+                log("$step (password ${if (cfg.password.isEmpty()) "empty" else "${cfg.password.length} characters"})")
+                started = System.currentTimeMillis()
+                val session = conn.authenticate(AuthenticationContext(cfg.username, cfg.password.toCharArray(), cfg.domain))
+                try {
+                    log("  signed in${sessionKind(session)} (${System.currentTimeMillis() - started} ms)")
+
+                    step = "5/5 Open share \"${cfg.share}\""
+                    log(step)
+                    val share = session.connectShare(cfg.share) as? DiskShare
+                        ?: throw IOException("\"${cfg.share}\" is not a file share (a printer or pipe?)")
+                    share.use {
+                        val entries = it.list("").count { e -> e.fileName != "." && e.fileName != ".." }
+                        log("  open, $entries entries in its top folder")
+                    }
+                } finally {
+                    runCatching { session.close() }
+                }
+            }
+            log("PASSED: every step worked.")
+        } catch (e: Exception) {
+            log("FAILED at $step: ${describe(e, cfg)}")
+            SmbLog.causes(e).forEach { log("  $it") }
+        }
+    }
+
+    /**
+     * The address to connect to for [host]: an IP address as it is, otherwise the system's DNS,
+     * and for a `.local` name (or a bare name like `TOWER` that DNS doesn't know) multicast DNS,
+     * which Android 7 doesn't do on its own. Throws [UnknownHostException] when nothing works.
+     */
+    fun resolve(host: String): String {
+        if (isIpAddress(host)) return host
+        resolved[host.lowercase(Locale.ROOT)]?.let { (address, at) ->
+            if (System.currentTimeMillis() - at < CACHE_MS) return address
+        }
+        val found = lookUp(host, SmbLog::add).firstOrNull()?.hostAddress
+            ?: throw UnknownHostException("Can't find a server called $host")
+        resolved[host.lowercase(Locale.ROOT)] = found to System.currentTimeMillis()
+        return found
+    }
+
+    private val resolved = java.util.concurrent.ConcurrentHashMap<String, Pair<String, Long>>()
+    private const val CACHE_MS = 10 * 60 * 1000L
+
+    /** Every way [resolve] looks [host] up, logging each; IPv4 first. Empty when none worked. */
+    private fun lookUp(host: String, log: (String) -> Unit): List<InetAddress> {
+        if (isIpAddress(host)) {
+            log("  $host is an IP address, no lookup needed")
+            return listOf(InetAddress.getByName(host))
+        }
+        val started = System.currentTimeMillis()
+        try {
+            val all = InetAddress.getAllByName(host).sortedBy { if (it is Inet4Address) 0 else 1 }
+            log("  DNS: ${all.joinToString { it.hostAddress ?: "" }} (${System.currentTimeMillis() - started} ms)")
+            return all
+        } catch (e: UnknownHostException) {
+            log("  DNS: not found (${System.currentTimeMillis() - started} ms)" +
+                if (isLocalName(host)) "; expected for a .local name on Android 7" else "")
+        }
+        val mdnsName = when {
+            isLocalName(host) -> host
+            !host.contains('.') -> "$host.local"
+            else -> return emptyList()
+        }
+        return MdnsResolver.resolve(mdnsName, log = { log("  $it") })
+    }
+
+    private fun isLocalName(host: String) = host.trimEnd('.').lowercase(Locale.ROOT).endsWith(".local")
+
+    private fun isIpAddress(host: String) =
+        host.matches(Regex("""\d{1,3}(\.\d{1,3}){3}""")) || host.contains(':')
+
+    private fun localAddresses(): String =
+        runCatching {
+            NetworkInterface.getNetworkInterfaces().toList()
+                .filter { it.isUp && !it.isLoopback }
+                .flatMap { nif -> nif.inetAddresses.toList().filterIsInstance<Inet4Address>().map { "${nif.name} ${it.hostAddress}" } }
+                .joinToString(", ")
+        }.getOrDefault("")
+
+    private fun who(cfg: ShareConfig) =
+        "\"${cfg.username}\"" + if (cfg.domain.isNotBlank()) " (domain \"${cfg.domain}\")" else ""
+
+    /** " as guest" when the server let us in as a guest instead of the account, which then usually can't open the share. */
+    private fun sessionKind(s: Session) = when {
+        s.isAnonymous -> " ANONYMOUSLY (the server ignored the account)"
+        s.isGuest -> " as GUEST (the server didn't accept the account and let us in as a guest)"
+        else -> ""
+    }
+
+    private fun ShareConfig.describe() =
+        "server $host:$port, share \"$share\", user \"$username\"" + if (domain.isNotBlank()) ", domain \"$domain\"" else ""
 
     /** The configured credentials, aimed at [location]'s host and share when it names one. */
     private fun target(location: SmbLocation?): ShareConfig {
@@ -139,15 +283,22 @@ object SmbConnections {
         val open = share
         if (open != null && connectedTo == cfg && open.isConnected) return open
         reset()
-        val conn = client.connect(cfg.host, cfg.port)
-        val s = conn.authenticate(AuthenticationContext(cfg.username, cfg.password.toCharArray(), cfg.domain))
-        val disk = s.connectShare(cfg.share) as? DiskShare
-            ?: throw IOException("\"${cfg.share}\" is not a file share")
-        connection = conn
-        session = s
-        share = disk
-        connectedTo = cfg
-        return disk
+        try {
+            val address = resolve(cfg.host)
+            val conn = client.connect(address, cfg.port)
+            val s = conn.authenticate(AuthenticationContext(cfg.username, cfg.password.toCharArray(), cfg.domain))
+            val disk = s.connectShare(cfg.share) as? DiskShare
+                ?: throw IOException("\"${cfg.share}\" is not a file share")
+            SmbLog.add("Connected: ${cfg.describe()} at $address, ${conn.negotiatedProtocol.dialect}${sessionKind(s)}")
+            connection = conn
+            session = s
+            share = disk
+            connectedTo = cfg
+            return disk
+        } catch (e: Exception) {
+            SmbLog.failure("Connecting failed: ${cfg.describe()}: ${describe(e, cfg)}", e)
+            throw e
+        }
     }
 
     @Synchronized
@@ -184,7 +335,8 @@ object SmbConnections {
         var t: Throwable? = e
         while (t != null) {
             when (t) {
-                is UnknownHostException -> return "Can't find a server called ${cfg?.host ?: "that"}"
+                is UnknownHostException -> return "Can't find a server called ${cfg?.host ?: "that"}" +
+                    " (try its IP address)"
                 is ConnectException, is NoRouteToHostException, is SocketTimeoutException ->
                     return "Can't reach ${cfg?.host ?: "the server"} (is SMB on, and the address right?)"
                 is SMBApiException -> return when (t.status) {

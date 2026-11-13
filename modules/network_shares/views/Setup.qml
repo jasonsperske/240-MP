@@ -4,7 +4,8 @@ import Components
 // Sign in to an SMB share: server, share, username, password (and a domain, rarely needed).
 // Up/Down move between fields; typing goes into the focused one. On the tablet, tapping a
 // field brings up Android's keyboard. The form sits in the top half of the screen so the
-// keyboard doesn't cover it. Connect tries the sign-in and saves only if it works.
+// keyboard doesn't cover it. Connect tries the sign-in and saves only if it works; Diagnose
+// checks the form's settings step by step and shows where they fail (Diagnostics.qml).
 FocusScope {
     id: setupRoot
     focus: true
@@ -19,9 +20,10 @@ FocusScope {
     property bool waiting: false
     property string errorMsg: ""
 
-    // Rows 0-4 are the fields below, 5 is Connect.
-    property int focusIndex: 0
+    // Rows 0-4 are the fields below, 5 is Connect, 6 is Diagnose.
+    property int focusIndex: returning ? diagnoseRow : 0
     readonly property int connectRow: fields.length
+    readonly property int diagnoseRow: fields.length + 1
 
     readonly property var fields: [
         { key: "host",     label: "Server",   hint: "nas.local or 192.168.1.20", secret: false },
@@ -30,7 +32,9 @@ FocusScope {
         { key: "password", label: "Password", hint: saved.hasPassword ? "(saved)" : "", secret: true },
         { key: "domain",   label: "Domain",   hint: "(usually blank)", secret: false }
     ]
-    property var values: ({
+    // Back from Diagnostics, the form comes back as it was left.
+    readonly property var returning: (navParams.navListState && navParams.navListState.values) || null
+    property var values: returning ? returning : ({
         host: saved.host || "",
         share: saved.share || "",
         username: saved.username || "",
@@ -56,6 +60,14 @@ FocusScope {
         networkSharesBackend.connectToShare(values.host, values.share, values.username, values.password, values.domain)
     }
 
+    function diagnose() {
+        Qt.inputMethod.hide()
+        navigateTo("Diagnostics.qml", {
+            host: values.host, share: values.share, username: values.username,
+            password: values.password, domain: values.domain
+        }, { values: values })
+    }
+
     Connections {
         target: networkSharesBackend
         function onConnectResult(ok, message) {
@@ -79,11 +91,12 @@ FocusScope {
         } else if (event.key === Qt.Key_Up) {
             focusIndex = Math.max(0, focusIndex - 1)
         } else if (event.key === Qt.Key_Down) {
-            focusIndex = Math.min(connectRow, focusIndex + 1)
+            focusIndex = Math.min(diagnoseRow, focusIndex + 1)
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
             // Enter on a field moves on (the Android keyboard's Done/Next does the same), and
             // on the last field or the button, connects.
-            if (focusIndex < connectRow - 1) focusIndex++
+            if (focusIndex === diagnoseRow) diagnose()
+            else if (focusIndex < connectRow - 1) focusIndex++
             else connect()
         } else {
             return
@@ -179,9 +192,39 @@ FocusScope {
             border.color: focused ? root.accentColor : root.tertiaryColor
             border.width: root.sh * 0.003125
 
+            MouseArea {
+                anchors.fill: parent
+                onClicked: { setupRoot.focusIndex = setupRoot.connectRow; setupRoot.connect() }
+            }
+
             Text {
                 anchors.centerIn: parent
                 text: setupRoot.waiting ? "Connecting..." : "Connect"
+                color: parent.focused ? root.surfaceColor : root.primaryColor
+                font.family: root.globalFont
+                font.capitalization: Font.AllUppercase
+                font.pixelSize: root.sh * 0.0375
+            }
+        }
+
+        Rectangle {
+            id: diagnoseButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: root.sw * 0.234375
+            height: root.sh * 0.0583333
+            readonly property bool focused: setupRoot.focusIndex === setupRoot.diagnoseRow
+            color: focused ? root.accentColor : root.surfaceColor
+            border.color: focused ? root.accentColor : root.tertiaryColor
+            border.width: root.sh * 0.003125
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: { setupRoot.focusIndex = setupRoot.diagnoseRow; setupRoot.diagnose() }
+            }
+
+            Text {
+                anchors.centerIn: parent
+                text: "Diagnose"
                 color: parent.focused ? root.surfaceColor : root.primaryColor
                 font.family: root.globalFont
                 font.capitalization: Font.AllUppercase
@@ -202,6 +245,8 @@ FocusScope {
         }
     }
 
+    Component.onCompleted: if (returning) Qt.inputMethod.hide()
+
     // On the tablet, bring the keyboard up for a field reached with the pad or a remote.
     onFocusIndexChanged: {
         if (Qt.platform.os === "android") {
@@ -211,7 +256,7 @@ FocusScope {
     }
 
     Text {
-        text: root.hints.back + ":BACK " + root.hints.navigate + ":NAVIGATE " + root.hints.select + ":NEXT / CONNECT"
+        text: root.hints.back + ":BACK " + root.hints.navigate + ":NAVIGATE " + root.hints.select + ":SELECT"
         color: root.tertiaryColor
         font.family: root.globalFont
         anchors.bottom: parent.bottom
