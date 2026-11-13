@@ -4,7 +4,7 @@
 
 The bike's sensors are read with [soloton](https://github.com/jasonsperske/soloton)'s bike library, vendored the same way [ExerDoom](https://github.com/jasonsperske/ExerDoom) vendors it.
 
-> **Status:** builds into an APK (arm64-v8a + armeabi-v7a for the bike, x86_64 for the emulator) and runs on an Android 7.0 (API 24) emulator shaped like the gen 1 tablet. On the emulator, the menus, touch pad, Ride Check, playback and the whole ride gate were exercised with the simulated bike: waiting to start, the 3 s grace, the hold, resuming, the 10 s ramp, and the NEXT warning. So were the no-bike path and the hand-back to the shell (the resume position comes back). Not yet tried on a real bike (see [Not yet verified](#not-yet-verified)).
+> **Status:** builds into an APK (arm64-v8a + armeabi-v7a for the bike, x86_64 for the emulator) and runs on an Android 7.0 (API 24) emulator shaped like the gen 1 tablet. On the emulator, the menus, touch pad, Ride Check, playback and the whole ride gate were exercised with the simulated bike: waiting to start, the 3 s grace, the hold, resuming, the 10 s ramp, and the NEXT warning. So were the no-bike path and the hand-back to the shell (the resume position comes back). On a real gen 1 bike, exercise mode works with the bike's sensors, and Network Shares signs in and browses (see [Not yet verified](#not-yet-verified) for what's left).
 
 ## How it fits together
 
@@ -98,6 +98,8 @@ Android 7 can't mount an SMB share without root, so the app speaks SMB itself, w
 - seeking and resume;
 - the server going away and coming back (the automatic reconnect, and RETRY).
 
+**On a real gen 1 bike**, against an Unraid server on home Wi-Fi: sign-in and browsing work, with the server entered as `tower.local` (found by the mDNS fallback). Playback from the share hasn't been checked on the bike yet.
+
 ## Building
 
 ### Prerequisites
@@ -173,6 +175,6 @@ adb shell am start -n com.mp240.app/dev.soloton.bike.BikeDiagnosticsActivity
 
 ## Not yet verified
 
-- **A real bike:** that the sensor service connects on its Android 7 firmware, and that the cadence and resistance units match (soloton's library is verified on one bike, but not its resistance).
+- **Streaming from a network share on the bike:** browsing is confirmed, but not playback over the bike's Wi-Fi (watch for stutter on high-bitrate files).
 - **Plex, Jellyfin and Emby streams** through ExoPlayer, including HTTPS through the bundled OpenSSL 1.1 and Plex sign-in. Only local files were played on the emulator.
 - **A Bluetooth gamepad or remote** on the tablet.
