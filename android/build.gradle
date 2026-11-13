@@ -12,6 +12,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        // A newer D8/R8 ahead of AGP's own: AGP 7.2's dexer (3.2.60) crashes on enum classes
+        // in current libraries (smbj, slf4j). Must come before the AGP line.
+        classpath 'com.android.tools:r8:8.2.47'
         classpath 'com.android.tools.build:gradle:7.2.1'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21'
     }
@@ -47,6 +50,11 @@ dependencies {
     implementation 'androidx.media3:media3-exoplayer-hls:1.1.1'
     implementation 'androidx.media3:media3-exoplayer-dash:1.1.1'
     implementation 'androidx.media3:media3-ui:1.1.1'
+    // SMB 2/3 for the Network Shares module (Apache-2.0). Its BouncyCastle provider supplies the
+    // MD4 that NTLM sign-in needs and Android's own crypto lacks.
+    implementation 'com.hierynomus:smbj:0.15.0'
+    // java.time on Android 7 (smbj's FileTime refers to Instant, which arrived in API 26).
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.9'
 }
 
 android {
@@ -81,6 +89,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+    }
+
+    // BouncyCastle (via smbj) and slf4j ship multi-release jar metadata Android doesn't use.
+    packagingOptions {
+        resources.excludes += ['META-INF/versions/**', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE*', 'META-INF/NOTICE*', 'META-INF/INDEX.LIST']
     }
 
     kotlinOptions {
