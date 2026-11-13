@@ -78,6 +78,17 @@ private slots:
     void onBackendAuthStateChanged();
 
 private:
+    // The name manifests use in "platforms": "android", "macos" or "linux".
+    static QString currentPlatform() {
+#if defined(Q_OS_ANDROID)
+        return QStringLiteral("android");
+#elif defined(Q_OS_MACOS)
+        return QStringLiteral("macos");
+#else
+        return QStringLiteral("linux");
+#endif
+    }
+
     QJsonObject loadConfig() const;
     void saveConfig(const QJsonObject &config) const;
     QString moduleIdForBackend(QObject *backend) const;

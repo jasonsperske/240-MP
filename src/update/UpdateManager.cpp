@@ -23,7 +23,10 @@ const QString kDefaultFeedUrl =
 // (SteamDeck / Intel/AMD desktop) ships a self-contained AppImage. Computed at
 // runtime because a single Linux binary could run on either arch.
 QString assetSuffix() {
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_ANDROID)
+    // Android (Q_OS_LINUX is also defined there) updates by installing a new APK, not in-app.
+    return QString();
+#elif defined(Q_OS_MAC)
     return QStringLiteral("-macOS-arm64.dmg");
 #elif defined(Q_OS_LINUX)
     return QSysInfo::currentCpuArchitecture() == QStringLiteral("arm64")

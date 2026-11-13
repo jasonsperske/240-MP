@@ -1,0 +1,5 @@
+# The bike library under android/vendor/ is vendored from soloton, GPL-2.0-or-later
+# (240-MP takes it under GPL-3.0). Same copy ExerDoom vendors.
+# Refresh with: scripts/sync-bike-lib.sh [path-to-soloton-checkout] [git-ref]
+repository=https://github.com/jasonsperske/soloton
+commit=3018224e6efa35932569343d5bd193561e15fada

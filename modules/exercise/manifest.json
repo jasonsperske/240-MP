@@ -1,0 +1,41 @@
+{
+  "id": "com.240mp.exercise",
+  "platforms": ["android"],
+  "name": "Exercise:Mode",
+  "icon": "assets/images/logo.svg",
+  "entry_point_qml": "views/Root.qml",
+  "settings": [
+    {
+      "key": "enabled",
+      "label": "ENABLED",
+      "type": "toggle",
+      "default": "ON"
+    },
+    {
+      "key": "exercise_mode",
+      "label": "Exercise Mode",
+      "type": "toggle",
+      "default": "ON"
+    },
+    {
+      "key": "workout",
+      "label": "Workout",
+      "type": "list_single",
+      "options": ["Steady", "Intervals", "Hills", "Spin Class"],
+      "default": "Steady"
+    },
+    {
+      "key": "difficulty",
+      "label": "Difficulty",
+      "type": "list_single",
+      "options": ["Easy", "Moderate", "Hard", "Expert"],
+      "default": "Moderate"
+    },
+    {
+      "key": "simulate_bike",
+      "label": "Simulated Bike",
+      "type": "toggle",
+      "default": "OFF"
+    }
+  ]
+}

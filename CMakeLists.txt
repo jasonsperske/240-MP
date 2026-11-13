@@ -15,12 +15,19 @@ set(APP_VERSION "dev" CACHE STRING "Release version (CI passes the git tag)")
 include(GNUInstallDirs)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Quick Qml Network Svg)
-find_package(OpenSSL REQUIRED)
-find_package(SDL2 CONFIG REQUIRED) # gamepad input (InputManager)
+
+if(ANDROID)
+    # The gen 1 Peloton Bike's tablet. Prebuilt OpenSSL, the APK's QML bundle and the
+    # Gradle side (android/) are set up in cmake/Android.cmake; see ANDROID.md.
+    include(cmake/Android.cmake)
+else()
+    find_package(OpenSSL REQUIRED)
+    find_package(SDL2 CONFIG REQUIRED) # gamepad input (InputManager)
+endif()
 
 # libdrm is used on Linux/RPi to save and restore the KMS CRTC state
 # around mpv playback so Qt EGLFS can resume cleanly after mpv exits.
-if(NOT APPLE)
+if(NOT APPLE AND NOT ANDROID)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(Libdrm REQUIRED libdrm)
 endif()
@@ -30,7 +37,9 @@ endif()
 # it — which is what makes the NFC module usable on immutable distros where
 # pcscd cannot be installed. macOS ships PCSC.framework with the OS; Linux needs
 # libpcsclite-dev.
-if(APPLE)
+if(ANDROID)
+    # No NFC module on Android (its manifest lists linux and macos only).
+elseif(APPLE)
     find_library(PCSC_LIBRARIES PCSC)
     if(PCSC_LIBRARIES)
         set(PCSC_FOUND TRUE)
@@ -38,7 +47,7 @@ if(APPLE)
 else()
     pkg_check_modules(PCSC IMPORTED_TARGET libpcsclite)
 endif()
-if(NOT PCSC_FOUND)
+if(NOT PCSC_FOUND AND NOT ANDROID)
     message(STATUS "PC/SC not found — NFC reader module will build with PN532 USB serial support only")
 endif()
 
@@ -46,7 +55,8 @@ if(APPLE)
     enable_language(OBJCXX)
 endif()
 
-add_executable(240mp
+# Built on every platform.
+set(MP240_SOURCES
     src/main.cpp
     src/AppCore.cpp
     src/modules/local_files/LocalFilesBackend.cpp
@@ -54,25 +64,41 @@ add_executable(240mp
     src/modules/jellyfin/JellyfinBackend.cpp
     src/modules/emby/EmbyBackend.cpp
     src/modules/ambient_mode/AmbientModeBackend.cpp
-    src/modules/youtube/YouTubeBackend.cpp
-    src/modules/nfc_reader/NfcReaderBackend.cpp
-    src/modules/nfc_reader/PcscDriver.cpp
-    src/modules/nfc_reader/Pn532SerialDriver.cpp
-    src/modules/nfc_reader/SerialPort.cpp
-    src/modules/weather/WeatherBackend.cpp
-    src/modules/scripts/ScriptsBackend.cpp
-    src/modules/scripts/ScriptLauncher.cpp
-    src/player/MpvController.cpp
     src/util/YtDlpLocator.cpp
     src/util/MpvLocator.cpp
     src/util/ExecPath.cpp
-    src/util/DisplayHandoff.cpp
     src/util/FontconfigOverride.cpp
     src/input/InputManager.cpp
     src/input/IdleTracker.cpp
     src/update/UpdateManager.cpp
-    $<$<BOOL:${APPLE}>:src/util/MacosUtils.mm>
 )
+
+if(ANDROID)
+    # Video goes to PlayerActivity (android/) instead of an mpv process; the exercise module
+    # reads the bike. qt_add_executable makes the shared library androiddeployqt packages.
+    qt_add_executable(240mp
+        ${MP240_SOURCES}
+        src/player/AndroidPlayerController.cpp
+        src/modules/exercise/ExerciseBackend.cpp
+        src/platform/android/AppBundle.cpp
+    )
+    mp240_configure_android(240mp)
+else()
+    add_executable(240mp
+        ${MP240_SOURCES}
+        src/modules/youtube/YouTubeBackend.cpp
+        src/modules/nfc_reader/NfcReaderBackend.cpp
+        src/modules/nfc_reader/PcscDriver.cpp
+        src/modules/nfc_reader/Pn532SerialDriver.cpp
+        src/modules/nfc_reader/SerialPort.cpp
+        src/modules/weather/WeatherBackend.cpp
+        src/modules/scripts/ScriptsBackend.cpp
+        src/modules/scripts/ScriptLauncher.cpp
+        src/player/MpvController.cpp
+        src/util/DisplayHandoff.cpp
+        $<$<BOOL:${APPLE}>:src/util/MacosUtils.mm>
+    )
+endif()
 
 target_compile_definitions(240mp PRIVATE APP_VERSION="${APP_VERSION}")
 
@@ -84,9 +110,14 @@ target_link_libraries(240mp PRIVATE
     Qt6::Network
     Qt6::Svg
     OpenSSL::Crypto
-    SDL2::SDL2
-    $<$<NOT:$<BOOL:${APPLE}>>:${Libdrm_LIBRARIES}>
 )
+
+if(NOT ANDROID)
+    target_link_libraries(240mp PRIVATE
+        SDL2::SDL2
+        $<$<NOT:$<BOOL:${APPLE}>>:${Libdrm_LIBRARIES}>
+    )
+endif()
 
 if(APPLE)
     target_link_libraries(240mp PRIVATE "-framework AppKit")
@@ -101,7 +132,7 @@ if(PCSC_FOUND)
     endif()
 endif()
 
-if(NOT APPLE)
+if(NOT APPLE AND NOT ANDROID)
     target_include_directories(240mp PRIVATE ${Libdrm_INCLUDE_DIRS})
 endif()
 
@@ -138,7 +169,9 @@ if(APPLE AND NOT DEFINED ENV{CI})
 endif()
 
 # ── Install rules ──────────────────────────────────────────────────────────────
-if(APPLE)
+if(ANDROID)
+    # Nothing to install: the APK (cmake --build ... --target apk) is the deliverable.
+elseif(APPLE)
     install(TARGETS 240mp BUNDLE DESTINATION . COMPONENT Runtime)
 
     # Use a hardcoded relative path — $<TARGET_BUNDLE_CONTENT_DIR> resolves to

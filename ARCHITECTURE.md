@@ -87,6 +87,8 @@ Loaded at startup by `AppCore` — the single source of truth for a module's ide
 }
 ```
 
+Optional `"platforms"` lists where the module is loaded: any of `"linux"`, `"macos"`, `"android"`. Leave it out to load the module everywhere. Modules that need desktop-only tools (NFC Reader, Scripts, YouTube, Weather) list `["linux", "macos"]`, and the Android-only exercise module lists `["android"]`. A module left off a platform must not be registered in that platform's `main.cpp` either. See [ANDROID.md](ANDROID.md).
+
 ### Setting types
 
 | `type` | Description | Extra fields |

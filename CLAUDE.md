@@ -33,6 +33,7 @@ This file stays intentionally lean. The detailed documentation is single-sourced
 | How to contribute, project principles, best-practices checklist, adding/changing a module, testing, coding style | **[CONTRIBUTING.md](CONTRIBUTING.md)** |
 | Building & running on macOS / Raspberry Pi, CI/release workflow, per-OS config/data directory paths | **[BUILDING.md](BUILDING.md)** |
 | End-user install (Raspberry Pi imaging, `config.txt`, macOS DMG) | **[INSTALL.md](INSTALL.md)** |
+| The Android build for the gen 1 Peloton Bike (Qt 6.4, `PlayerActivity` instead of mpv, exercise mode, bike sensors) | **[ANDROID.md](ANDROID.md)** |
 
 ---
 
@@ -44,4 +45,5 @@ This file stays intentionally lean. The detailed documentation is single-sourced
 - **`PlexBackend` is the reference implementation** for backends.
 - **Config** is `config.json` in the data dir; module settings live under `modules.<id>`. Use `save_setting` / `get_setting` (dot-notation supported), not direct file writes.
 - **An NFC card can hand off to another module** (a Plex guid on a card plays through the Plex module). The NFC backend routes by URI scheme; the receiving module carries a `CardPlay.qml` that resolves and then `replaceWith`s its Player. A module reached this way must bypass its own auth/user gate — a card plays as whoever is already active and must never prompt a profile switch. (Details: [ARCHITECTURE.md → Card Hand-off](ARCHITECTURE.md#card-hand-off-nfc--a-module).)
+- **Android (gen 1 Peloton Bike) builds with Qt 6.4.3**, the last Qt that reaches Android 7.0 — no QML or C++ API newer than 6.4 in shared code, or give Android a `+android/` QML override (as `views/Components/+android/AppBar.qml` does). On Android `mpvController` is `AndroidPlayerController`, which hands video to a Kotlin `PlayerActivity` that also runs exercise mode. (Details: [ANDROID.md](ANDROID.md).)
 - **Gamepad input is centralized in `src/input/InputManager`** (SDL2) and arrives in QML as ordinary synthesized key events — never add gamepad-specific handling to views; if a view handles the right keys it handles gamepads. Footer hint labels bind to `root.hints.*` (adapts keyboard↔gamepad), never hardcoded `[ESC]`/`[ENTER]` strings and never `inputManager.hints.*` directly — context-property bindings throw TypeErrors when the view Loader tears down; id-resolved `root.*` is teardown-safe. (Details: [ARCHITECTURE.md → Input](ARCHITECTURE.md#input-inputmanager).)

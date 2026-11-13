@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
+// Vendored from soloton (libs/bike, published there as bike-android); see ../UPSTREAM. The sources
+// are upstream's as they are; this build file replaces upstream's (see ../bike-core/build.gradle).
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+android {
+    namespace 'dev.soloton.bike'
+    compileSdk 33
+    defaultConfig {
+        minSdk 24
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api project(':bike-core')
+}

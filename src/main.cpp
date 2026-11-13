@@ -19,21 +19,34 @@
 #include "modules/jellyfin/JellyfinBackend.h"
 #include "modules/emby/EmbyBackend.h"
 #include "modules/ambient_mode/AmbientModeBackend.h"
+#include "input/InputManager.h"
+#include "input/IdleTracker.h"
+#include "update/UpdateManager.h"
+#include "util/ExecPath.h"
+#ifdef Q_OS_ANDROID
+// Android (the gen 1 Peloton Bike's tablet): video goes to PlayerActivity instead of mpv, and
+// the exercise module runs the bike. NFC, Scripts, YouTube and Weather need PC/SC, a VT,
+// yt-dlp or mpv, so their manifests keep them off Android and they are not built here.
+#include "modules/exercise/ExerciseBackend.h"
+#include "player/AndroidPlayerController.h"
+#include "platform/android/AppBundle.h"
+#else
 #include "modules/nfc_reader/NfcReaderBackend.h"
 #include "modules/youtube/YouTubeBackend.h"
 #include "modules/weather/WeatherBackend.h"
 #include "modules/scripts/ScriptsBackend.h"
 #include "player/MpvController.h"
-#include "input/InputManager.h"
-#include "input/IdleTracker.h"
-#include "update/UpdateManager.h"
-#include "util/ExecPath.h"
 #include "util/DisplayHandoff.h"
+#endif
 #ifdef Q_OS_MAC
 #include "util/MacosUtils.h"
 #endif
 
 static QString resolveAppRoot() {
+#ifdef Q_OS_ANDROID
+    // QML and assets are bundled into the APK as resources; see platform/android/AppBundle.h.
+    return appbundle::extract();
+#endif
     QString envRoot = qEnvironmentVariable("APP_ROOT");
     if (!envRoot.isEmpty())
         return QDir(envRoot).canonicalPath();
@@ -154,16 +167,23 @@ int main(int argc, char *argv[]) {
     JellyfinBackend     jellyfinBackend(appRoot, dataRoot);
     EmbyBackend         embyBackend(appRoot, dataRoot);
     AmbientModeBackend  ambientMode(dataRoot);
+#ifdef Q_OS_ANDROID
+    ExerciseBackend     exerciseBackend;
+    // Same QML name and surface as MpvController, so module Player views are unchanged.
+    AndroidPlayerController mpvController(appRoot, &appCore);
+#else
     NfcReaderBackend    nfcReader(appRoot, dataRoot, &appCore);
     YouTubeBackend      youtubeBackend(appRoot, dataRoot);
     WeatherBackend      weatherBackend(appRoot, dataRoot);
     DisplayHandoff      displayHandoff;
     ScriptsBackend      scriptsBackend(appRoot, dataRoot, &displayHandoff);
     MpvController       mpvController(appRoot, dataRoot, &appCore, &displayHandoff);
+#endif
     InputManager        inputManager(dataRoot, &appCore);
     IdleTracker         idleTracker(60);   // disabled until Main.qml applies the saved setting
     UpdateManager       updateManager(appRoot, dataRoot);
 
+#ifndef Q_OS_ANDROID
     // Playback follows the UI's display: mpv gets a --fs-screen* arg derived
     // from this on macOS / desktop Linux (no-op at index 0 and on headless).
     mpvController.setTargetDisplay(displayIndex, targetScreen ? targetScreen->name() : QString());
@@ -172,6 +192,7 @@ int main(int argc, char *argv[]) {
     // gamepad actions bypass QML and drive mpv directly over IPC.
     QObject::connect(&inputManager, &InputManager::mpvKeyRequested,
                      &mpvController, &MpvController::sendKey);
+#endif
 
     // Each module backend is wired in one call: stored for action routing, exposed to QML
     // under its context-property name, and its optional signals/slots connected by
@@ -182,10 +203,14 @@ int main(int argc, char *argv[]) {
     appCore.registerModule("com.240mp.jellyfin",     "jellyfinBackend",    &jellyfinBackend, ctx);
     appCore.registerModule("com.240mp.emby",         "embyBackend",        &embyBackend, ctx);
     appCore.registerModule("com.240mp.ambient_mode", "ambientModeBackend", &ambientMode, ctx);
+#ifdef Q_OS_ANDROID
+    appCore.registerModule("com.240mp.exercise",     "exerciseBackend",    &exerciseBackend, ctx);
+#else
     appCore.registerModule("com.240mp.nfc_reader",   "nfcReaderBackend",   &nfcReader,   ctx);
     appCore.registerModule("com.240mp.youtube",      "youtubeBackend",     &youtubeBackend, ctx);
     appCore.registerModule("com.240mp.weather",      "weatherBackend",     &weatherBackend, ctx);
     appCore.registerModule("com.240mp.scripts",      "scriptsBackend",     &scriptsBackend, ctx);
+#endif
 
     ctx->setContextProperty("idleTracker",   &idleTracker);
     ctx->setContextProperty("appCore",       &appCore);

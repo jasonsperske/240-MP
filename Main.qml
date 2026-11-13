@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Window
+import Components
 
 Window {
     id: root
@@ -224,8 +225,9 @@ Window {
     // owns the display, and even a console one is legitimately silent for as long
     // as it takes. Its own flag rather than reusing mpvActive, so ending one
     // session can't unblock the saver while the other is still going.
+    // (No Scripts module on Android, hence the typeof guard.)
     Connections {
-        target: scriptsBackend
+        target: typeof scriptsBackend !== "undefined" ? scriptsBackend : null
         function onScriptRunningChanged() {
             idleTracker.scriptActive = scriptsBackend.scriptBusy
             idleTracker.resetActivity()
@@ -281,6 +283,18 @@ Window {
             }
 
         }
+    }
+
+    // --- TOUCH PAD (Android) ---
+    // The Peloton tablet is touch-only; this pad taps the same keys a gamepad would
+    // (inputManager.tapKey), so no view needs touch handling of its own.
+    Loader {
+        active: Qt.platform.os === "android"
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: root.sw * 0.004
+        anchors.bottomMargin: root.sh * 0.03
+        sourceComponent: TouchPad {}
     }
 
     // --- SCREEN SAVER (Idle Tracker integration) ---

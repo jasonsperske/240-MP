@@ -57,6 +57,11 @@ public:
     // pad's Back button can still cancel the overlay.
     Q_INVOKABLE void setRemapCapture(bool active);
 
+    // On-screen controls (the Android touch pad, views/Components/TouchPad.qml): a tap is a
+    // press and release of [qtKey], delivered like a gamepad's synthesized keys, so views need
+    // nothing touch-specific.
+    Q_INVOKABLE void tapKey(int qtKey);
+
 signals:
     void gamepadConnectedChanged();
     void lastInputDeviceChanged();
