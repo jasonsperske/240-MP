@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/qt_internal_android_armeabi-v7a"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/qt_internal_android_armeabi-v7a.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/qt_internal_android_armeabi-v7a-complete.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-build.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-configure.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-download.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-install.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-mkdir.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-patch.rule"
+		},
+		{
+			"file" : "/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"qt_internal_android_armeabi-v7a"
+		],
+		"name" : "qt_internal_android_armeabi-v7a"
+	}
+}

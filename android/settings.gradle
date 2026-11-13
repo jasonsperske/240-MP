@@ -1,4 +1,5 @@
-rootProject.name = '240mp'
+// No rootProject.name: androiddeployqt expects the APK to be named after its android-build
+// directory (android-build-debug.apk) and fails to find it otherwise.
 
 // Vendored from soloton, GPL-2.0-or-later: see vendor/UPSTREAM.
 include ':bike-core', ':bike'

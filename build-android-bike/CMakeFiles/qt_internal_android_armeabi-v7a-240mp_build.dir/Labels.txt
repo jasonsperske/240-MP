@@ -1,0 +1,11 @@
+# Target labels
+ qt_internal_android_armeabi-v7a
+# Source files and their labels
+/home/jason/dev/240-MP/build-android-bike/CMakeFiles/qt_internal_android_armeabi-v7a-240mp_build
+/home/jason/dev/240-MP/build-android-bike/CMakeFiles/qt_internal_android_armeabi-v7a-240mp_build.rule
+/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-240mp_build.rule
+/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-configure.rule
+/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-patch.rule
+/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-update.rule
+/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-download.rule
+/home/jason/dev/240-MP/build-android-bike/qt_internal_android_armeabi-v7a-prefix/src/qt_internal_android_armeabi-v7a-stamp/qt_internal_android_armeabi-v7a-mkdir.rule

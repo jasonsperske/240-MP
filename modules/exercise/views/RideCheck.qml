@@ -25,6 +25,7 @@ FocusScope {
     property string workout: "Steady"
     property string difficulty: "Moderate"
     property var preview: ({})
+    readonly property int segmentCount: preview.segments ? preview.segments.length : 0
 
     function toggleValue(v, fallback) {
         if (v === undefined || v === null || v === "") return fallback
@@ -216,7 +217,7 @@ FocusScope {
             anchors.top: rows.bottom
             anchors.topMargin: root.sh * 0.025
             text: checkRoot.exerciseOn
-                ? "A " + checkRoot.previewMinutes + " min video: " + (preview.segments ? preview.segments.length : 0) + " segments"
+                ? "A " + checkRoot.previewMinutes + " min video: " + segmentCount + (segmentCount === 1 ? " segment" : " segments")
                 : "Exercise mode is off: videos play without the bike"
             color: root.secondaryColor
             font.family: root.globalFont

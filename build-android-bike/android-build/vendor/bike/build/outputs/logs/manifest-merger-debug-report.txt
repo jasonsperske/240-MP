@@ -1,0 +1,67 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:4:1-40:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:4:1-40:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:4:1-40:12
+	package
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:4:1-40:12
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:4:11-69
+uses-permission#onepeloton.permission.ACCESS_SENSOR_SERVICE
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:11:5-83
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:11:22-80
+queries
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:14:5-23:15
+package#com.onepeloton.affernetservice
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:15:9-66
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:15:18-63
+package#com.peloton.service.SensorData
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:16:9-66
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:16:18-63
+intent#action:name:com.onepeloton.affernetservice.IV1Interface
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:17:9-19:18
+action#com.onepeloton.affernetservice.IV1Interface
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:18:13-82
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:18:21-79
+intent#action:name:android.intent.action.peloton.SensorData
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:20:9-22:18
+action#android.intent.action.peloton.SensorData
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:21:13-79
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:21:21-76
+application
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:25:5-39:19
+activity#dev.soloton.bike.BikeDiagnosticsActivity
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:32:9-38:89
+	android:screenOrientation
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:37:13-56
+	android:label
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:36:13-52
+	android:exported
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:35:13-36
+	android:configChanges
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:34:13-74
+	android:theme
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:38:13-86
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml:33:13-68
+uses-sdk
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/src/main/AndroidManifest.xml

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    240-MP on Android: built for the gen 1 Peloton Bike's tablet (Android 7.0, API 24, 1920x1080
+    landscape). Qt 6.4's androiddeployqt fills in the %%INSERT%% markers.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mp240.app"
+    android:installLocation="auto"
+    android:versionCode="1"
+    android:versionName="dev" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="31" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- The tablet has a touchscreen and no keyboard; a gamepad or remote is optional. -->
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+    <!--
+        Declared by Grupetto. The one firmware whose service manifest has been published
+        (Android 11) does not guard the sensor service with it, but an older build might, and
+        requesting a permission that does not exist costs nothing.
+    -->
+    <uses-permission android:name="onepeloton.permission.ACCESS_SENSOR_SERVICE" /> <!-- Package visibility for Android 11+ tablets. Ignored on the API 24 bike. -->
+    <queries>
+        <package android:name="com.onepeloton.affernetservice" />
+        <package android:name="com.peloton.service.SensorData" />
+
+        <intent>
+            <action android:name="com.onepeloton.affernetservice.IV1Interface" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.peloton.SensorData" />
+        </intent>
+    </queries>
+
+    <application
+        android:name="org.qtproject.qt.android.bindings.QtApplication"
+        android:allowBackup="true"
+        android:allowNativeHeapPointerTagging="false"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:fullBackupOnly="false"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/icon"
+        android:label="240-MP"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name="com.mp240.android.MainActivity"
+            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
+            android:exported="true"
+            android:label="240-MP"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Mp240.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="240mp" />
+            <meta-data
+                android:name="android.app.arguments"
+                android:value="" />
+            <meta-data
+                android:name="android.app.extract_android_style"
+                android:value="minimal" />
+
+            <!--
+                Keep Qt's event loop running while PlayerActivity is in front: the shell gets
+                progress and end-of-playback reports (Plex timeline updates, resume points) as
+                they happen, the way it does from mpv on the desktop.
+            -->
+            <meta-data
+                android:name="android.app.background_running"
+                android:value="true" />
+        </activity>
+        <activity
+            android:name="com.mp240.android.PlayerActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Mp240.Fullscreen" />
+        <!--
+            Exported with no launcher entry, so the owner can open it over adb from any app that
+            includes this library:
+            adb shell am start -n <application id>/dev.soloton.bike.BikeDiagnosticsActivity
+            It only reads sensors and shows them; it takes nothing from the starting intent.
+        -->
+        <activity
+            android:name="dev.soloton.bike.BikeDiagnosticsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:label="Bike sensor diagnostics"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+    </application>
+
+</manifest>

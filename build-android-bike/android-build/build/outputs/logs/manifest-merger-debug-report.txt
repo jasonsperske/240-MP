@@ -1,0 +1,278 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+MERGED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:4:1-48:12
+MERGED from [androidx.media3:media3-exoplayer-hls:1.1.1] /home/jason/.gradle/caches/transforms-3/e9409b2754e9e1ed1b44a40193286a04/transformed/media3-exoplayer-hls-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-exoplayer-dash:1.1.1] /home/jason/.gradle/caches/transforms-3/55b377ac7f269cc36c9099081da2302d/transformed/media3-exoplayer-dash-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/jason/.gradle/caches/transforms-3/f9a54c86eb2d60693aa1d611f9ec6084/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.media3:media3-extractor:1.1.1] /home/jason/.gradle/caches/transforms-3/3d15ec8b5951fcfbf096281af4740531/transformed/media3-extractor-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-container:1.1.1] /home/jason/.gradle/caches/transforms-3/1cbf630d0f00554e1052a59666e22974/transformed/media3-container-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-datasource:1.1.1] /home/jason/.gradle/caches/transforms-3/a6c50f8c597fc3c09f11af08f4def3af/transformed/media3-datasource-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-decoder:1.1.1] /home/jason/.gradle/caches/transforms-3/52ff6b7afb6d6f7fbcc8c139df283fa0/transformed/media3-decoder-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-database:1.1.1] /home/jason/.gradle/caches/transforms-3/f875e81932c65464c8e67b7dbe6cbd11/transformed/media3-database-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-common:1.1.1] /home/jason/.gradle/caches/transforms-3/6dcc750f613e045bd9d14ccaad0a9831/transformed/media3-common-1.1.1/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.media3:media3-ui:1.1.1] /home/jason/.gradle/caches/transforms-3/28779f2d53466fd88e1052a7dcfb1f59/transformed/media3-ui-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/jason/.gradle/caches/transforms-3/5c443163d644ca4a1018c7c70c97a210/transformed/recyclerview-1.3.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/jason/.gradle/caches/transforms-3/4b82c1a23226f8f30b7d2da4f0384295/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.5.0] /home/jason/.gradle/caches/transforms-3/0443d85686c2c4c7ba171a23c795b998/transformed/core-ktx-1.5.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.media:media:1.6.0] /home/jason/.gradle/caches/transforms-3/3be9373a3e0a98d05fae4c33b241d23d/transformed/media-1.6.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /home/jason/.gradle/caches/transforms-3/02becd22d1ff2278216e9b2d9a32cf9d/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /home/jason/.gradle/caches/transforms-3/9848b734cfad121934f6d177ff6b8384/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/jason/.gradle/caches/transforms-3/cf39f9ef98189a686481e3724f53bc87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/jason/.gradle/caches/transforms-3/d71e2a0ab8bfffe40f9689d59bacb141/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.2.0] /home/jason/.gradle/caches/transforms-3/f779ced08d35110fd07d12803bc3fa67/transformed/annotation-experimental-1.2.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:1-81:12
+	package
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:7:5-28
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+	android:versionName
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:10:5-30
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:6:11-69
+	android:versionCode
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:9:5-28
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+	android:installLocation
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:8:5-35
+uses-permission#android.permission.INTERNET
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:11:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:12:5-81
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:12:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:13:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/jason/.gradle/caches/transforms-3/f9a54c86eb2d60693aa1d611f9ec6084/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/jason/.gradle/caches/transforms-3/f9a54c86eb2d60693aa1d611f9ec6084/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-common:1.1.1] /home/jason/.gradle/caches/transforms-3/6dcc750f613e045bd9d14ccaad0a9831/transformed/media3-common-1.1.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-common:1.1.1] /home/jason/.gradle/caches/transforms-3/6dcc750f613e045bd9d14ccaad0a9831/transformed/media3-common-1.1.1/AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:13:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:17:5-80
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:17:22-77
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:18:5-68
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:18:22-65
+uses-feature#android.hardware.touchscreen
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:21:5-90
+	android:required
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:21:63-87
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:21:19-62
+uses-feature#android.software.leanback
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:22:5-87
+	android:required
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:22:60-84
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:22:19-59
+supports-screens
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:24:5-28:39
+	android:largeScreens
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:26:9-36
+	android:smallScreens
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:28:9-36
+	android:normalScreens
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:27:9-37
+	android:anyDensity
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:25:9-34
+application
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:29:5-80:19
+MERGED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:31:5-46:19
+MERGED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:31:5-46:19
+MERGED from [androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/jason/.gradle/caches/transforms-3/cf39f9ef98189a686481e3724f53bc87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/jason/.gradle/caches/transforms-3/cf39f9ef98189a686481e3724f53bc87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:requestLegacyExternalStorage
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:34:9-52
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:32:9-31
+	android:hardwareAccelerated
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:31:9-43
+	android:icon
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:33:9-38
+	android:allowBackup
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:37:9-35
+	android:allowNativeHeapPointerTagging
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:35:9-54
+	android:fullBackupOnly
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:38:9-39
+	android:usesCleartextTraffic
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:36:9-44
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:30:9-71
+activity#com.mp240.android.MainActivity
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:39:9-72:20
+	android:screenOrientation
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:44:13-56
+	android:label
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:42:13-35
+	android:launchMode
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:43:13-43
+	android:exported
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:46:13-36
+	android:configChanges
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:41:13-182
+	android:theme
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:45:13-52
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:40:13-58
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:47:13-50:29
+action#android.intent.action.MAIN
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:48:17-69
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:48:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:49:17-77
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:49:27-74
+meta-data#android.app.lib_name
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:52:13-54:41
+	android:value
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:54:17-38
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:53:17-52
+meta-data#android.app.arguments
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:56:13-58:36
+	android:value
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:58:17-33
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:57:17-53
+meta-data#android.app.extract_android_style
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:60:13-62:43
+	android:value
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:62:17-40
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:61:17-65
+meta-data#android.app.background_running
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:69:13-71:40
+	android:value
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:71:17-37
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:70:17-62
+activity#com.mp240.android.PlayerActivity
+ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:74:9-79:40
+	android:screenOrientation
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:77:13-56
+	android:exported
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:79:13-37
+	android:configChanges
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:76:13-126
+	android:theme
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:78:13-52
+	android:name
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:75:13-60
+uses-sdk
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+MERGED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.media3:media3-exoplayer-hls:1.1.1] /home/jason/.gradle/caches/transforms-3/e9409b2754e9e1ed1b44a40193286a04/transformed/media3-exoplayer-hls-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer-hls:1.1.1] /home/jason/.gradle/caches/transforms-3/e9409b2754e9e1ed1b44a40193286a04/transformed/media3-exoplayer-hls-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer-dash:1.1.1] /home/jason/.gradle/caches/transforms-3/55b377ac7f269cc36c9099081da2302d/transformed/media3-exoplayer-dash-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer-dash:1.1.1] /home/jason/.gradle/caches/transforms-3/55b377ac7f269cc36c9099081da2302d/transformed/media3-exoplayer-dash-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/jason/.gradle/caches/transforms-3/f9a54c86eb2d60693aa1d611f9ec6084/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/jason/.gradle/caches/transforms-3/f9a54c86eb2d60693aa1d611f9ec6084/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-extractor:1.1.1] /home/jason/.gradle/caches/transforms-3/3d15ec8b5951fcfbf096281af4740531/transformed/media3-extractor-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-extractor:1.1.1] /home/jason/.gradle/caches/transforms-3/3d15ec8b5951fcfbf096281af4740531/transformed/media3-extractor-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-container:1.1.1] /home/jason/.gradle/caches/transforms-3/1cbf630d0f00554e1052a59666e22974/transformed/media3-container-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-container:1.1.1] /home/jason/.gradle/caches/transforms-3/1cbf630d0f00554e1052a59666e22974/transformed/media3-container-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-datasource:1.1.1] /home/jason/.gradle/caches/transforms-3/a6c50f8c597fc3c09f11af08f4def3af/transformed/media3-datasource-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-datasource:1.1.1] /home/jason/.gradle/caches/transforms-3/a6c50f8c597fc3c09f11af08f4def3af/transformed/media3-datasource-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-decoder:1.1.1] /home/jason/.gradle/caches/transforms-3/52ff6b7afb6d6f7fbcc8c139df283fa0/transformed/media3-decoder-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-decoder:1.1.1] /home/jason/.gradle/caches/transforms-3/52ff6b7afb6d6f7fbcc8c139df283fa0/transformed/media3-decoder-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-database:1.1.1] /home/jason/.gradle/caches/transforms-3/f875e81932c65464c8e67b7dbe6cbd11/transformed/media3-database-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-database:1.1.1] /home/jason/.gradle/caches/transforms-3/f875e81932c65464c8e67b7dbe6cbd11/transformed/media3-database-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-common:1.1.1] /home/jason/.gradle/caches/transforms-3/6dcc750f613e045bd9d14ccaad0a9831/transformed/media3-common-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-common:1.1.1] /home/jason/.gradle/caches/transforms-3/6dcc750f613e045bd9d14ccaad0a9831/transformed/media3-common-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-ui:1.1.1] /home/jason/.gradle/caches/transforms-3/28779f2d53466fd88e1052a7dcfb1f59/transformed/media3-ui-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-ui:1.1.1] /home/jason/.gradle/caches/transforms-3/28779f2d53466fd88e1052a7dcfb1f59/transformed/media3-ui-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/jason/.gradle/caches/transforms-3/5c443163d644ca4a1018c7c70c97a210/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/jason/.gradle/caches/transforms-3/5c443163d644ca4a1018c7c70c97a210/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/jason/.gradle/caches/transforms-3/4b82c1a23226f8f30b7d2da4f0384295/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/jason/.gradle/caches/transforms-3/4b82c1a23226f8f30b7d2da4f0384295/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.5.0] /home/jason/.gradle/caches/transforms-3/0443d85686c2c4c7ba171a23c795b998/transformed/core-ktx-1.5.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.5.0] /home/jason/.gradle/caches/transforms-3/0443d85686c2c4c7ba171a23c795b998/transformed/core-ktx-1.5.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.media:media:1.6.0] /home/jason/.gradle/caches/transforms-3/3be9373a3e0a98d05fae4c33b241d23d/transformed/media-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.6.0] /home/jason/.gradle/caches/transforms-3/3be9373a3e0a98d05fae4c33b241d23d/transformed/media-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /home/jason/.gradle/caches/transforms-3/02becd22d1ff2278216e9b2d9a32cf9d/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/jason/.gradle/caches/transforms-3/02becd22d1ff2278216e9b2d9a32cf9d/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /home/jason/.gradle/caches/transforms-3/9848b734cfad121934f6d177ff6b8384/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /home/jason/.gradle/caches/transforms-3/9848b734cfad121934f6d177ff6b8384/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/jason/.gradle/caches/transforms-3/cf39f9ef98189a686481e3724f53bc87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/jason/.gradle/caches/transforms-3/cf39f9ef98189a686481e3724f53bc87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/jason/.gradle/caches/transforms-3/d71e2a0ab8bfffe40f9689d59bacb141/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/jason/.gradle/caches/transforms-3/d71e2a0ab8bfffe40f9689d59bacb141/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.2.0] /home/jason/.gradle/caches/transforms-3/f779ced08d35110fd07d12803bc3fa67/transformed/annotation-experimental-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.2.0] /home/jason/.gradle/caches/transforms-3/f779ced08d35110fd07d12803bc3fa67/transformed/annotation-experimental-1.2.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		ADDED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+		INJECTED from /home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+uses-permission#onepeloton.permission.ACCESS_SENSOR_SERVICE
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:5-83
+	android:name
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:22-80
+queries
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:5-29:15
+package#com.onepeloton.affernetservice
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-66
+	android:name
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:18-63
+package#com.peloton.service.SensorData
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:9-66
+	android:name
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:18-63
+intent#action:name:com.onepeloton.affernetservice.IV1Interface
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-25:18
+action#com.onepeloton.affernetservice.IV1Interface
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-82
+	android:name
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:21-79
+intent#action:name:android.intent.action.peloton.SensorData
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:9-28:18
+action#android.intent.action.peloton.SensorData
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-79
+	android:name
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:21-76
+activity#dev.soloton.bike.BikeDiagnosticsActivity
+ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:39:9-45:89
+	android:screenOrientation
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-56
+	android:label
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:43:13-52
+	android:exported
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:13-36
+	android:configChanges
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-74
+	android:theme
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-86
+	android:name
+		ADDED from [:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-68

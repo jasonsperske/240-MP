@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
+// Vendored from soloton (libs/bike-core); see ../UPSTREAM. The sources are upstream's as they are;
+// this build file replaces upstream's, which needs soloton's convention plugins and a newer AGP
+// than Qt 6.4's Android template (Java 8 bytecode, Kotlin 2.0).
+apply plugin: 'org.jetbrains.kotlin.jvm'
+apply plugin: 'java-library'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+kotlin {
+    compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+}
+
+test {
+    useJUnitPlatform()
+}

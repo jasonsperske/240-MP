@@ -1,0 +1,210 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3    240-MP on Android: built for the gen 1 Peloton Bike's tablet (Android 7.0, API 24, 1920x1080
+4    landscape). Qt 6.4's androiddeployqt fills in the %%INSERT%% markers.
+5-->
+6<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+7    package="com.mp240.app"
+8    android:installLocation="auto"
+9    android:versionCode="1"
+10    android:versionName="dev" >
+11
+12    <uses-sdk
+13        android:minSdkVersion="24"
+13-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+14        android:targetSdkVersion="31" />
+14-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml
+15
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:11:5-67
+16-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:11:22-64
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:12:5-81
+17-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:12:22-78
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:13:5-79
+18-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:13:22-76
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:11:5-67
+19-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:11:22-64
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:13:5-79
+20-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:13:22-76
+21    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+21-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:17:5-80
+21-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:17:22-77
+22    <uses-permission android:name="android.permission.WAKE_LOCK" />
+22-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:18:5-68
+22-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:18:22-65
+23
+24    <!-- The tablet has a touchscreen and no keyboard; a gamepad or remote is optional. -->
+25    <uses-feature
+25-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:21:5-90
+26        android:name="android.hardware.touchscreen"
+26-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:21:19-62
+27        android:required="false" />
+27-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:21:63-87
+28    <uses-feature
+28-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:22:5-87
+29        android:name="android.software.leanback"
+29-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:22:19-59
+30        android:required="false" />
+30-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:22:60-84
+31
+32    <supports-screens
+32-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:24:5-28:39
+33        android:anyDensity="true"
+33-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:25:9-34
+34        android:largeScreens="true"
+34-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:26:9-36
+35        android:normalScreens="true"
+35-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:27:9-37
+36        android:smallScreens="true" />
+36-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:28:9-36
+37    <!--
+38        Declared by Grupetto. The one firmware whose service manifest has been published
+39        (Android 11) does not guard the sensor service with it, but an older build might, and
+40        requesting a permission that does not exist costs nothing.
+41    -->
+42    <uses-permission android:name="onepeloton.permission.ACCESS_SENSOR_SERVICE" /> <!-- Package visibility for Android 11+ tablets. Ignored on the API 24 bike. -->
+42-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:5-83
+42-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:22-80
+43    <queries>
+43-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:5-29:15
+44        <package android:name="com.onepeloton.affernetservice" />
+44-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-66
+44-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:18-63
+45        <package android:name="com.peloton.service.SensorData" />
+45-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:9-66
+45-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:18-63
+46
+47        <intent>
+47-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-25:18
+48            <action android:name="com.onepeloton.affernetservice.IV1Interface" />
+48-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-82
+48-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:21-79
+49        </intent>
+50        <intent>
+50-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:9-28:18
+51            <action android:name="android.intent.action.peloton.SensorData" />
+51-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-79
+51-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:21-76
+52        </intent>
+53    </queries>
+54
+55    <application
+55-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:29:5-80:19
+56        android:name="org.qtproject.qt.android.bindings.QtApplication"
+56-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:30:9-71
+57        android:allowBackup="true"
+57-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:37:9-35
+58        android:allowNativeHeapPointerTagging="false"
+58-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:35:9-54
+59        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+59-->[androidx.core:core:1.8.0] /home/jason/.gradle/caches/transforms-3/99dcb9e417a9b8f4c01b788083083d71/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+60        android:debuggable="true"
+61        android:fullBackupOnly="false"
+61-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:38:9-39
+62        android:hardwareAccelerated="true"
+62-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:31:9-43
+63        android:icon="@drawable/icon"
+63-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:33:9-38
+64        android:label="240-MP"
+64-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:32:9-31
+65        android:requestLegacyExternalStorage="true"
+65-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:34:9-52
+66        android:usesCleartextTraffic="true" >
+66-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:36:9-44
+67        <activity
+67-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:39:9-72:20
+68            android:name="com.mp240.android.MainActivity"
+68-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:40:13-58
+69            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
+69-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:41:13-182
+70            android:exported="true"
+70-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:46:13-36
+71            android:label="240-MP"
+71-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:42:13-35
+72            android:launchMode="singleTop"
+72-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:43:13-43
+73            android:screenOrientation="sensorLandscape"
+73-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:44:13-56
+74            android:theme="@style/Mp240.Fullscreen" >
+74-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:45:13-52
+75            <intent-filter>
+75-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:47:13-50:29
+76                <action android:name="android.intent.action.MAIN" />
+76-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:48:17-69
+76-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:48:25-66
+77
+78                <category android:name="android.intent.category.LAUNCHER" />
+78-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:49:17-77
+78-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:49:27-74
+79            </intent-filter>
+80
+81            <meta-data
+81-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:52:13-54:41
+82                android:name="android.app.lib_name"
+82-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:53:17-52
+83                android:value="240mp" />
+83-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:54:17-38
+84            <meta-data
+84-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:56:13-58:36
+85                android:name="android.app.arguments"
+85-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:57:17-53
+86                android:value="" />
+86-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:58:17-33
+87            <meta-data
+87-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:60:13-62:43
+88                android:name="android.app.extract_android_style"
+88-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:61:17-65
+89                android:value="minimal" />
+89-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:62:17-40
+90
+91            <!--
+92                Keep Qt's event loop running while PlayerActivity is in front: the shell gets
+93                progress and end-of-playback reports (Plex timeline updates, resume points) as
+94                they happen, the way it does from mpv on the desktop.
+95            -->
+96            <meta-data
+96-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:69:13-71:40
+97                android:name="android.app.background_running"
+97-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:70:17-62
+98                android:value="true" />
+98-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:71:17-37
+99        </activity>
+100        <activity
+100-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:74:9-79:40
+101            android:name="com.mp240.android.PlayerActivity"
+101-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:75:13-60
+102            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation"
+102-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:76:13-126
+103            android:exported="false"
+103-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:79:13-37
+104            android:screenOrientation="sensorLandscape"
+104-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:77:13-56
+105            android:theme="@style/Mp240.Fullscreen" />
+105-->/home/jason/dev/240-MP/build-android-bike/android-build/AndroidManifest.xml:78:13-52
+106        <!--
+107            Exported with no launcher entry, so the owner can open it over adb from any app that
+108            includes this library:
+109            adb shell am start -n <application id>/dev.soloton.bike.BikeDiagnosticsActivity
+110            It only reads sensors and shows them; it takes nothing from the starting intent.
+111        -->
+112        <activity
+112-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:39:9-45:89
+113            android:name="dev.soloton.bike.BikeDiagnosticsActivity"
+113-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-68
+114            android:configChanges="orientation|screenSize|keyboardHidden"
+114-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-74
+115            android:exported="true"
+115-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:13-36
+116            android:label="Bike sensor diagnostics"
+116-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:43:13-52
+117            android:screenOrientation="sensorLandscape"
+117-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-56
+118            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+118-->[:bike] /home/jason/dev/240-MP/build-android-bike/android-build/vendor/bike/build/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-86
+119    </application>
+120
+121</manifest>

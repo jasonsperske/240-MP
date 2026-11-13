@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+    240-MP on Android: built for the gen 1 Peloton Bike's tablet (Android 7.0, API 24, 1920x1080
+    landscape). Qt 6.4's androiddeployqt fills in the %%INSERT%% markers.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mp240.app"
+    android:installLocation="auto"
+    android:versionCode="1"
+    android:versionName="dev">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- The tablet has a touchscreen and no keyboard; a gamepad or remote is optional. -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+    <application
+        android:name="org.qtproject.qt.android.bindings.QtApplication"
+        android:hardwareAccelerated="true"
+        android:label="240-MP"
+        android:icon="@drawable/icon"
+        android:requestLegacyExternalStorage="true"
+        android:allowNativeHeapPointerTagging="false"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:fullBackupOnly="false">
+        <activity
+            android:name="com.mp240.android.MainActivity"
+            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
+            android:label="240-MP"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Mp240.Fullscreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="240mp" />
+
+            <meta-data
+                android:name="android.app.arguments"
+                android:value="" />
+
+            <meta-data
+                android:name="android.app.extract_android_style"
+                android:value="minimal" />
+
+            <!--
+                Keep Qt's event loop running while PlayerActivity is in front: the shell gets
+                progress and end-of-playback reports (Plex timeline updates, resume points) as
+                they happen, the way it does from mpv on the desktop.
+            -->
+            <meta-data
+                android:name="android.app.background_running"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="com.mp240.android.PlayerActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Mp240.Fullscreen"
+            android:exported="false" />
+    </application>
+</manifest>

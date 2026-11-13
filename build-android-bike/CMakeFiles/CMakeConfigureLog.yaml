@@ -1,0 +1,526 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The target system is: Android - 23 - aarch64
+      The host system is: Linux - 7.0.0-43-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ 
+      Build flags: 
+      Id flags: -c;--target=aarch64-none-linux-android23 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        /home/jason/dev/240-MP/build-android-bike/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Ljb1rO"
+      binary: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Ljb1rO"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_NATIVE_API_LEVEL: "23"
+      ANDROID_NDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_SDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Ljb1rO'
+        
+        Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_5bb4f
+        [1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE   -v -MD -MT CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -c /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        Android (7714059, based on r416183c1) clang version 12.0.8 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)
+        Target: aarch64-none-linux-android23
+        Thread model: posix
+        InstalledDir: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin
+        Found candidate GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x
+        Selected GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x
+        Candidate multilib: .;@m64
+        Selected multilib: .;@m64
+         (in-process)
+         "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android23 -emit-obj --mrelax-relocations -mnoexecstack -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu generic -target-feature +neon -target-abi aapcs -mllvm -aarch64-fix-cortex-a53-835769=1 -fallow-half-arguments-and-returns -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -resource-dir /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8 -dependency-file CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -D NDEBUG -isysroot /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include -internal-externc-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -O2 -Wformat -fdeprecated-macro -fdebug-compilation-dir /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Ljb1rO -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -vectorize-loops -vectorize-slp -o CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -x c++ /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 12.0.8 based upon LLVM 12.0.8git default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1
+         /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include
+         /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include
+         /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
+         /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        [2/2] : && /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections -v CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_5bb4f  -latomic -lm && :
+        Android (7714059, based on r416183c1) clang version 12.0.8 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)
+        Target: aarch64-none-linux-android23
+        Thread model: posix
+        InstalledDir: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin
+        Found candidate GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x
+        Selected GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x
+        Candidate multilib: .;@m64
+        Selected multilib: .;@m64
+         "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/ld" --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -z noexecstack -EL --fix-cortex-a53-843419 --warn-shared-textrel -z now -z relro -z max-page-size=4096 --hash-style=gnu --enable-new-dtags --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_5bb4f /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64 -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23 -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --fatal-warnings --no-undefined --gc-sections CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -latomic -lm -lc++ -lm /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+          add: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include]
+          add: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include]
+          add: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+          add: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        collapse include dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include]
+        collapse include dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include]
+        collapse include dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+        collapse include dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Ljb1rO']
+        ignore line: []
+        ignore line: [Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_5bb4f]
+        ignore line: [[1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE   -v -MD -MT CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -c /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Android (7714059  based on r416183c1) clang version 12.0.8 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)]
+        ignore line: [Target: aarch64-none-linux-android23]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [Found candidate GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x]
+        ignore line: [Selected GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x]
+        ignore line: [Candidate multilib: .]
+        ignore line: [@m64]
+        ignore line: [Selected multilib: .]
+        ignore line: [@m64]
+        ignore line: [ (in-process)]
+        ignore line: [ "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android23 -emit-obj --mrelax-relocations -mnoexecstack -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu generic -target-feature +neon -target-abi aapcs -mllvm -aarch64-fix-cortex-a53-835769=1 -fallow-half-arguments-and-returns -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -resource-dir /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8 -dependency-file CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -D NDEBUG -isysroot /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include -internal-externc-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -O2 -Wformat -fdeprecated-macro -fdebug-compilation-dir /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Ljb1rO -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -vectorize-loops -vectorize-slp -o CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -x c++ /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 12.0.8 based upon LLVM 12.0.8git default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        ignore line: [ /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include]
+        ignore line: [ /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/include]
+        ignore line: [ /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+        ignore line: [ /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [[2/2] : && /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl --build-id=sha1 -Wl --no-rosegment -Wl --fatal-warnings -Qunused-arguments -Wl --no-undefined  -Wl --gc-sections -v CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_5bb4f  -latomic -lm && :]
+        ignore line: [Android (7714059  based on r416183c1) clang version 12.0.8 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)]
+        ignore line: [Target: aarch64-none-linux-android23]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [Found candidate GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x]
+        ignore line: [Selected GCC installation: /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x]
+        ignore line: [Candidate multilib: .]
+        ignore line: [@m64]
+        ignore line: [Selected multilib: .]
+        ignore line: [@m64]
+        link line: [ "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/ld" --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -z noexecstack -EL --fix-cortex-a53-843419 --warn-shared-textrel -z now -z relro -z max-page-size=4096 --hash-style=gnu --enable-new-dtags --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_5bb4f /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64 -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23 -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --fatal-warnings --no-undefined --gc-sections CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o -latomic -lm -lc++ -lm /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o]
+          arg [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/ld] ==> ignore
+          arg [--sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znoexecstack] ==> ignore
+          arg [-EL] ==> ignore
+          arg [--fix-cortex-a53-843419] ==> ignore
+          arg [--warn-shared-textrel] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--enable-new-dtags] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [aarch64linux] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker64] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_5bb4f] ==> ignore
+          arg [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o] ==> obj [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o]
+          arg [-L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64] ==> dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64]
+          arg [-L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x] ==> dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x]
+          arg [-L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23] ==> dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23]
+          arg [-L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
+          arg [-L/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-rosegment] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [--gc-sections] ==> ignore
+          arg [CMakeFiles/cmTC_5bb4f.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-latomic] ==> lib [atomic]
+          arg [-lm] ==> lib [m]
+          arg [-lc++] ==> lib [c++]
+          arg [-lm] ==> lib [m]
+          arg [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o] ==> obj [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o]
+        linker tool for 'CXX': /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/ld
+        remove lib [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        remove lib [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        collapse library dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64]
+        collapse library dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/../lib/gcc/aarch64-linux-android/4.9.x] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/aarch64-linux-android/4.9.x]
+        collapse library dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23]
+        collapse library dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
+        collapse library dir [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [atomic;m;c++;m;-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o]
+        implicit dirs: [/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.8/lib/linux/aarch64;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/aarch64-linux-android/4.9.x;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android;/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/ld" "-v"
+      LLD 12.0.8 (/buildbot/src/android/llvm-r416183/out/llvm-project/lld c935d99d7cf2016289302412d708641d52d2f7ee) (compatible with GNU linkers)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:33 (find_dependency)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Dependencies.cmake:24 (_qt_internal_find_third_party_dependencies)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:112 (include)"
+      - "CMakeLists.txt:17 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Gy1qPv"
+      binary: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Gy1qPv"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_NATIVE_API_LEVEL: "23"
+      ANDROID_NDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_SDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Gy1qPv'
+        
+        Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_a156e
+        [1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_a156e.dir/src.cxx.o -MF CMakeFiles/cmTC_a156e.dir/src.cxx.o.d -o CMakeFiles/cmTC_a156e.dir/src.cxx.o -c /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Gy1qPv/src.cxx
+        FAILED: CMakeFiles/cmTC_a156e.dir/src.cxx.o 
+        /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_a156e.dir/src.cxx.o -MF CMakeFiles/cmTC_a156e.dir/src.cxx.o.d -o CMakeFiles/cmTC_a156e.dir/src.cxx.o -c /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Gy1qPv/src.cxx
+        /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-Gy1qPv/src.cxx:13:3: error: use of undeclared identifier 'pthread_cancel'
+          pthread_cancel(thread);
+          ^
+        1 error generated.
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/FindThreads.cmake:136 (try_compile)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/FindThreads.cmake:169 (_threads_check_flag_pthread)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:33 (find_dependency)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Dependencies.cmake:24 (_qt_internal_find_third_party_dependencies)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:112 (include)"
+      - "CMakeLists.txt:17 (find_package)"
+    checks:
+      - "Check if compiler accepts -pthread"
+    directories:
+      source: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-ruAFyx"
+      binary: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-ruAFyx"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_NATIVE_API_LEVEL: "23"
+      ANDROID_NDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_SDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "THREADS_HAVE_PTHREAD_ARG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-ruAFyx'
+        
+        Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_4296f
+        [1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_4296f.dir/CheckForPthreads.cxx.o -MF CMakeFiles/cmTC_4296f.dir/CheckForPthreads.cxx.o.d -o CMakeFiles/cmTC_4296f.dir/CheckForPthreads.cxx.o -c /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-ruAFyx/CheckForPthreads.cxx
+        [2/2] : && /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_4296f.dir/CheckForPthreads.cxx.o -o cmTC_4296f  -pthread   -latomic -lm && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/FindWrapAtomic.cmake:33 (check_cxx_source_compiles)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:33 (find_dependency)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake:30 (_qt_internal_find_third_party_dependencies)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6Core/Qt6CoreConfig.cmake:40 (include)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:157 (find_package)"
+      - "CMakeLists.txt:17 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-O05cAs"
+      binary: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-O05cAs"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_NATIVE_API_LEVEL: "23"
+      ANDROID_NDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_SDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-O05cAs'
+        
+        Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_9e1b1
+        [1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_STDATOMIC  -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_9e1b1.dir/src.cxx.o -MF CMakeFiles/cmTC_9e1b1.dir/src.cxx.o.d -o CMakeFiles/cmTC_9e1b1.dir/src.cxx.o -c /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-O05cAs/src.cxx
+        [2/2] : && /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_9e1b1.dir/src.cxx.o -o cmTC_9e1b1  -latomic -lm && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules/FindEGL.cmake:127 (check_cxx_source_compiles)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/FindGLESv2.cmake:10 (find_package)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:33 (find_dependency)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:30 (_qt_internal_find_third_party_dependencies)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:40 (include)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:157 (find_package)"
+      - "CMakeLists.txt:17 (find_package)"
+    checks:
+      - "Performing Test HAVE_EGL"
+    directories:
+      source: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-bJ70aD"
+      binary: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-bJ70aD"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_NATIVE_API_LEVEL: "23"
+      ANDROID_NDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_SDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "HAVE_EGL"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-bJ70aD'
+        
+        Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_91cd9
+        [1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_EGL  -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_91cd9.dir/src.cxx.o -MF CMakeFiles/cmTC_91cd9.dir/src.cxx.o.d -o CMakeFiles/cmTC_91cd9.dir/src.cxx.o -c /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-bJ70aD/src.cxx
+        [2/2] : && /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_91cd9.dir/src.cxx.o -o cmTC_91cd9  /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/libEGL.so   -latomic -lm && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/FindGLESv2.cmake:24 (check_cxx_source_compiles)"
+      - "/home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:33 (find_dependency)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:30 (_qt_internal_find_third_party_dependencies)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:40 (include)"
+      - "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:157 (find_package)"
+      - "CMakeLists.txt:17 (find_package)"
+    checks:
+      - "Performing Test HAVE_GLESv2"
+    directories:
+      source: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-MdaP7N"
+      binary: "/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-MdaP7N"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_NATIVE_API_LEVEL: "23"
+      ANDROID_NDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_SDK_ROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/platforms;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "/home/jason/Qt/6.4.3/android_arm64_v8a/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "HAVE_GLESv2"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-MdaP7N'
+        
+        Run Build Command(s): /home/jason/.local/share/soloton-toolchain/android-sdk/cmake/3.31.6/bin/ninja -v cmTC_ecf30
+        [1/2] /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_GLESv2  -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_ecf30.dir/src.cxx.o -MF CMakeFiles/cmTC_ecf30.dir/src.cxx.o.d -o CMakeFiles/cmTC_ecf30.dir/src.cxx.o -c /home/jason/dev/240-MP/build-android-bike/CMakeFiles/CMakeScratch/TryCompile-MdaP7N/src.cxx
+        [2/2] : && /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_ecf30.dir/src.cxx.o -o cmTC_ecf30  /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/libGLESv2.so  /home/jason/.local/share/soloton-toolchain/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/23/libEGL.so   -latomic -lm && :
+        
+      exitCode: 0
+...

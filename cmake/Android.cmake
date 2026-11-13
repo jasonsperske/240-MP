@@ -35,6 +35,10 @@ set_target_properties(OpenSSL::Crypto PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${MP240_ANDROID_OPENSSL_DIR}/include")
 set(MP240_ANDROID_OPENSSL_LIBS "${_mp240_ssl_lib}/libcrypto_1_1.so" "${_mp240_ssl_lib}/libssl_1_1.so")
 
+# A multi-ABI build (QT_ANDROID_ABIS / QT_ANDROID_BUILD_ALL_ABIS) re-runs CMake once per extra
+# ABI; these settings have to reach those runs too.
+list(APPEND QT_ANDROID_MULTI_ABI_FORWARD_VARS MP240_ANDROID_OPENSSL_DIR MP240_ANDROID_VERSION_CODE)
+
 # ── The app target ────────────────────────────────────────────────────────────
 function(mp240_configure_android target)
     # QML, module folders and assets go into the APK as resources under :/app; at startup

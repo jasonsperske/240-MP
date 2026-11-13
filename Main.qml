@@ -225,8 +225,9 @@ Window {
     // owns the display, and even a console one is legitimately silent for as long
     // as it takes. Its own flag rather than reusing mpvActive, so ending one
     // session can't unblock the saver while the other is still going.
+    // (No Scripts module on Android, hence the typeof guard.)
     Connections {
-        target: scriptsBackend
+        target: typeof scriptsBackend !== "undefined" ? scriptsBackend : null
         function onScriptRunningChanged() {
             idleTracker.scriptActive = scriptsBackend.scriptBusy
             idleTracker.resetActivity()
