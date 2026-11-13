@@ -1,5 +1,6 @@
 {
   "id": "com.240mp.youtube",
+  "platforms": ["linux", "macos"],
   "name": "YouTube",
   "icon": "assets/images/logo.svg",
   "version": "1.0",

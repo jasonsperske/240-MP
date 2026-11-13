@@ -1,5 +1,6 @@
 {
   "id": "com.240mp.scripts",
+  "platforms": ["linux", "macos"],
   "name": "Scripts",
   "icon": "assets/images/logo.svg",
   "entry_point_qml": "views/Root.qml",

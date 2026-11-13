@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Window
+import Components
 
 Window {
     id: root
@@ -281,6 +282,18 @@ Window {
             }
 
         }
+    }
+
+    // --- TOUCH PAD (Android) ---
+    // The Peloton tablet is touch-only; this pad taps the same keys a gamepad would
+    // (inputManager.tapKey), so no view needs touch handling of its own.
+    Loader {
+        active: Qt.platform.os === "android"
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: root.sw * 0.004
+        anchors.bottomMargin: root.sh * 0.03
+        sourceComponent: TouchPad {}
     }
 
     // --- SCREEN SAVER (Idle Tracker integration) ---

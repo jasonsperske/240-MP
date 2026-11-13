@@ -1,0 +1,9 @@
+rootProject.name = '240mp'
+
+// Vendored from soloton, GPL-2.0-or-later: see vendor/UPSTREAM.
+include ':bike-core', ':bike'
+project(':bike-core').projectDir = file('vendor/bike-core')
+project(':bike').projectDir = file('vendor/bike')
+
+// Workout programs and the ride gate: plain Kotlin, unit tested on the JVM.
+include ':exercise-core'

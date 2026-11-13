@@ -1,5 +1,6 @@
 {
   "id": "com.240mp.nfc_reader",
+  "platforms": ["linux", "macos"],
   "name": "NFC Reader",
   "icon": "assets/images/logo.svg",
   "entry_point_qml": "views/Root.qml",

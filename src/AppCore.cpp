@@ -34,6 +34,14 @@ AppCore::AppCore(const QString &appRoot, const QString &dataRoot, QObject *paren
                      qPrintable(folder));
             continue;
         }
+        // Optional "platforms": ["android", "linux", "macos"]. A module that lists platforms
+        // is loaded only on those (the exercise module needs the Peloton tablet; NFC, Scripts
+        // and YouTube need things Android lacks). No list means everywhere.
+        const QJsonArray platforms = manifest["platforms"].toArray();
+        if (!platforms.isEmpty() && !platforms.contains(QJsonValue(currentPlatform()))) {
+            qDebug("[AppCore] Skipping %s: not built for %s", qPrintable(id), qPrintable(currentPlatform()));
+            continue;
+        }
         ModuleEntry m;
         m.id       = id;
         m.name     = manifest["name"].toString();

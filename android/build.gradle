@@ -1,0 +1,105 @@
+// 240-MP's Android build. androiddeployqt copies this directory (QT_ANDROID_PACKAGE_SOURCE_DIR in
+// CMakeLists.txt) over Qt 6.4's Gradle template and runs it; this file replaces the template's
+// build.gradle. Qt 6.4.3 is the last Qt whose Android support reaches Android 7.0 (API 24), the
+// gen 1 Peloton Bike's tablet, so the toolchain is pinned to what it ships: Gradle 7.4.2 and
+// AGP 7.2.1, with Kotlin 2.0.21 (the newest Kotlin that supports that pair).
+//
+// The Kotlin libraries can be built and tested without Qt, from the repository root:
+//   scripts/android-kotlin-tests.sh
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// androiddeployqt writes qtAndroidDir (and the SDK levels below) into gradle.properties. Without
+// it this is a standalone run for the libraries' tests: there is no app to configure, and the
+// outputs go under the repository's build/ (androiddeployqt copies this whole directory into
+// its Gradle build, so nothing may be written here).
+if (!project.hasProperty('qtAndroidDir')) {
+    allprojects {
+        buildDir = new File(rootDir, "../build/android-kotlin/${project.name}")
+    }
+    return
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation project(':bike')
+    implementation project(':exercise-core')
+    // Media3 1.1.x is the newest line that builds against compileSdk 33 / AGP 7.2.
+    implementation 'androidx.media3:media3-exoplayer:1.1.1'
+    implementation 'androidx.media3:media3-exoplayer-hls:1.1.1'
+    implementation 'androidx.media3:media3-exoplayer-dash:1.1.1'
+    implementation 'androidx.media3:media3-ui:1.1.1'
+}
+
+android {
+    namespace 'com.mp240.app'
+    // Pinned rather than taken from androiddeployqt (which picks the newest platform installed):
+    // AGP 7.2.1 cannot build against the newest SDKs. Install with
+    //   sdkmanager "platforms;android-33" "build-tools;33.0.2"
+    compileSdkVersion 33
+    buildToolsVersion '33.0.2'
+    ndkVersion androidNdkVersion
+
+    // Extract native libraries from the APK
+    packagingOptions.jniLibs.useLegacyPackaging true
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = [qtAndroidDir + '/src', 'src', 'java']
+            aidl.srcDirs = [qtAndroidDir + '/src', 'src', 'aidl']
+            res.srcDirs = [qtAndroidDir + '/res', 'res']
+            resources.srcDirs = ['resources']
+            renderscript.srcDirs = ['src']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.incremental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // Do not compress Qt binary resources file
+    aaptOptions {
+        noCompress 'rcc'
+    }
+
+    defaultConfig {
+        resConfig "en"
+        minSdkVersion qtMinSdkVersion
+        targetSdkVersion qtTargetSdkVersion
+        ndk.abiFilters = qtTargetAbiList.split(",")
+    }
+}
