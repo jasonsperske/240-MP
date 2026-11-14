@@ -62,6 +62,8 @@ public:
     void onProgress(int session, int positionMs, int durationMs, int playlistPos);
     void onEnded(int session, int positionMs, int durationMs, const QString &reason);
     void onSkipRequested(int session);
+    // Saves a Stats View / Stats Corner change made in the player (exercise module settings).
+    void saveExerciseSetting(const QString &key, const QString &value);
 
 signals:
     void positionChanged(int ms);

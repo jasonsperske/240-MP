@@ -8,6 +8,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.os.SystemClock
+import android.view.MotionEvent
 import android.view.View
 import com.mp240.exercise.Program
 import com.mp240.exercise.RideGate
@@ -18,18 +19,56 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * The exercise overlay, drawn in 240-MP's on-screen-display style (VCR font, the "Video 1" blue):
+ * The exercise overlay, drawn in 240-MP's on-screen-display style (VCR font, the "Video 1" blue).
+ * Two [Style]s, picked with the exercise module's Stats View setting:
  *
- * - along the top, the ride's profile: one bar per segment, as tall as its resistance, with the
- *   playhead;
- * - top left, a panel with the segment, its time left, and the rider's cadence and resistance
- *   against the target (green at or above, amber in the grace period, red below);
- * - when the video is held, a card in the middle saying what to do.
+ * - [Style.DETAILED]: along the top, the ride's profile (one bar per segment, as tall as its
+ *   resistance, with the playhead), and a panel with the segment, its time left, and the rider's
+ *   cadence and resistance against the target, with bars;
+ * - [Style.MINIMAL]: one slim bar with the time left and the two numbers against their targets.
+ *
+ * Numbers are green at or above the target, amber in the grace period, red below. The panel sits
+ * in the [Corner] set by Stats Corner. When the video is held, a card in the middle says what to do.
+ *
+ * The view covers the screen but takes no taps except on the "no bike" card ([onCardTap]), so the
+ * player's controls underneath stay usable.
  *
  * Sizes follow the view's height, as the QML side's do (`root.sh`), so it reads the same at
  * 1080p on the bike and on a small emulator.
  */
 class RideHud(context: Context, val typeface: Typeface) : View(context) {
+    enum class Style(val label: String) {
+        DETAILED("Detailed"), MINIMAL("Minimal");
+
+        companion object {
+            fun fromLabel(label: String) = values().firstOrNull { it.label.equals(label.trim(), ignoreCase = true) } ?: DETAILED
+        }
+    }
+
+    enum class Corner(val label: String, val top: Boolean, val left: Boolean) {
+        TOP_LEFT("Top Left", true, true), TOP_RIGHT("Top Right", true, false),
+        BOTTOM_LEFT("Bottom Left", false, true), BOTTOM_RIGHT("Bottom Right", false, false);
+
+        companion object {
+            fun fromLabel(label: String) = values().firstOrNull { it.label.equals(label.trim(), ignoreCase = true) } ?: TOP_LEFT
+        }
+    }
+
+    var style = Style.DETAILED
+        set(value) { field = value; invalidate() }
+    var corner = Corner.TOP_LEFT
+        set(value) { field = value; invalidate() }
+
+    /** While the player's controls show, a panel in a bottom corner moves up clear of the seek bar. */
+    var controlsShown = false
+        set(value) { field = value; invalidate() }
+
+    /** A tap on the "no bike" card: the touch way to watch without exercise. */
+    var onCardTap: (() -> Unit)? = null
+
+    private val cardRect = RectF()
+    private var cardShown = false
+
     private var status: RideGate.Status? = null
     private var program: Program? = null
     private var positionMs = 0L
@@ -54,9 +93,87 @@ class RideHud(context: Context, val typeface: Typeface) : View(context) {
         val s = status ?: return
         val p = program ?: return
         val u = height / 100f // one percent of the screen's height
-        drawProfile(canvas, p, u)
-        drawPanel(canvas, s, p, u)
-        if (!s.open) drawCard(canvas, s, u)
+        if (style == Style.DETAILED) {
+            drawProfile(canvas, p, u)
+            drawPanel(canvas, s, p, u)
+        } else {
+            drawBar(canvas, s, p, u)
+        }
+        cardShown = !s.open
+        if (cardShown) drawCard(canvas, s, u) else cardRect.setEmpty()
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val s = status
+        val onCard = cardShown && s?.shortfall == Shortfall.NO_BIKE && cardRect.contains(event.x, event.y)
+        if (!onCard) return false // let the tap reach the player's controls
+        if (event.actionMasked == MotionEvent.ACTION_UP) onCardTap?.invoke()
+        return true
+    }
+
+    /** Where a [w] by [h] panel goes for [corner]: its top-left point. */
+    private fun place(w: Float, h: Float, u: Float): Pair<Float, Float> {
+        val margin = 2f * u
+        val x = if (corner.left) margin else width - w - margin
+        val y = when {
+            corner.top && style == Style.DETAILED -> 7.5f * u // below the profile
+            corner.top -> margin
+            controlsShown -> height - h - 14f * u // above the seek bar and time
+            else -> height - h - margin
+        }
+        return x to y
+    }
+
+    /** [Style.MINIMAL]: "0:54  RPM 75/70  RES 35/30" in one bar, with the ride's progress along its foot. */
+    private fun drawBar(canvas: Canvas, s: RideGate.Status, p: Program, u: Float) {
+        text.textSize = 3.6f * u
+        val gap = 2.5f * u
+        val pad = 2f * u
+        val blink = s.segmentRemainingMs < 5_000 && (SystemClock.uptimeMillis() / 400) % 2 == 0L
+        val time = (if (showNext(s)) nextArrow(s) + " " else "") + clock(s.segmentRemainingMs)
+        val cadence = String.format("RPM %d/%d", Math.round(s.sample.rpm), s.target.rpm)
+        val resistance = String.format("RES %d/%d", Math.round(s.sample.resistance), s.target.resistance)
+        val w = pad * 2 + text.measureText(time) + gap + text.measureText(cadence) + gap + text.measureText(resistance)
+        val h = 6.5f * u
+        val (left, top) = place(w, h, u)
+        fill.color = PANEL
+        rect.set(left, top, left + w, top + h)
+        canvas.drawRect(rect, fill)
+
+        val y = top + 4.6f * u
+        var x = left + pad
+        text.color = if (showNext(s) && !blink) ACCENT else WHITE
+        canvas.drawText(time, x, y, text)
+        x += text.measureText(time) + gap
+        text.color = metricColour(s, slow = s.shortfall == Shortfall.CADENCE || s.shortfall == Shortfall.BOTH)
+        canvas.drawText(cadence, x, y, text)
+        x += text.measureText(cadence) + gap
+        text.color = metricColour(s, slow = s.shortfall == Shortfall.RESISTANCE || s.shortfall == Shortfall.BOTH)
+        canvas.drawText(resistance, x, y, text)
+
+        // The ride's progress, as a thin line along the bar's foot.
+        val pos = if (p.repeats) positionMs % p.lengthMs else min(positionMs, p.lengthMs)
+        val done = if (p.lengthMs > 0) pos / p.lengthMs.toFloat() else 0f
+        fill.color = TERTIARY
+        canvas.drawRect(left, top + h - 0.6f * u, left + w, top + h, fill)
+        fill.color = ACCENT
+        canvas.drawRect(left, top + h - 0.6f * u, left + w * done, top + h, fill)
+    }
+
+    private fun metricColour(s: RideGate.Status, slow: Boolean) = when {
+        s.shortfall == Shortfall.NO_BIKE -> TERTIARY
+        !slow -> GOOD
+        s.phase == Phase.SLIPPING -> WARN
+        else -> BAD
+    }
+
+    private fun nextArrow(s: RideGate.Status): String {
+        val next = s.next ?: return "►"
+        return when {
+            next.target.resistance > s.segment.target.resistance || next.target.rpm > s.segment.target.rpm -> "▲"
+            next.target.resistance < s.segment.target.resistance || next.target.rpm < s.segment.target.rpm -> "▼"
+            else -> "►"
+        }
     }
 
     /** The ride's shape across the top: bar height is resistance; past segments are dimmed. */
@@ -84,12 +201,11 @@ class RideHud(context: Context, val typeface: Typeface) : View(context) {
     }
 
     private fun drawPanel(canvas: Canvas, s: RideGate.Status, p: Program, u: Float) {
-        val left = 2f * u
-        val top = 7.5f * u
         val w = 58f * u
         // Mode, segment, RPM, RES, and NEXT when it is coming up; 5.5u a line plus padding.
         val lines = if (showNext(s)) 5 else 4
         val h = (7f + (lines - 1) * 5.5f) * u
+        val (left, top) = place(w, h, u)
         fill.color = PANEL
         rect.set(left, top, left + w, top + h)
         canvas.drawRect(rect, fill)
@@ -120,23 +236,14 @@ class RideHud(context: Context, val typeface: Typeface) : View(context) {
             // Blink in the last few seconds before the change.
             val blink = s.segmentRemainingMs < 5_000 && (SystemClock.uptimeMillis() / 400) % 2 == 0L
             text.color = if (blink) WHITE else ACCENT
-            val arrow = when {
-                next.target.resistance > s.segment.target.resistance || next.target.rpm > s.segment.target.rpm -> "▲"
-                next.target.resistance < s.segment.target.resistance || next.target.rpm < s.segment.target.rpm -> "▼"
-                else -> "►"
-            }
+            val arrow = nextArrow(s)
             canvas.drawText("NEXT $arrow ${next.effort.label} ${next.target.rpm}/${next.target.resistance} IN ${clock(s.segmentRemainingMs)}", x, y, text)
         }
     }
 
     /** "RPM  84 / 65" with a bar: the target is the tick, the bar is the rider. */
     private fun drawMetric(canvas: Canvas, name: String, value: Float, target: Int, s: RideGate.Status, slow: Boolean, x: Float, y: Float, w: Float, u: Float) {
-        val colour = when {
-            s.shortfall == Shortfall.NO_BIKE -> TERTIARY
-            !slow -> GOOD
-            s.phase == Phase.SLIPPING -> WARN
-            else -> BAD
-        }
+        val colour = metricColour(s, slow)
         text.textSize = 3.6f * u
         text.color = colour
         val label = String.format("%s %3d / %d", name, Math.round(value), target)
@@ -176,6 +283,7 @@ class RideHud(context: Context, val typeface: Typeface) : View(context) {
         fill.color = CARD
         rect.set(cx - boxW, cy - boxH / 2, cx + boxW, cy + boxH / 2)
         canvas.drawRect(rect, fill)
+        cardRect.set(rect)
 
         text.color = if (s.phase == Phase.STARTING || s.shortfall == Shortfall.NO_BIKE) WHITE else BAD
         text.textSize = 7f * u

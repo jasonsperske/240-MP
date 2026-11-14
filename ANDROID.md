@@ -61,9 +61,27 @@ Warm-up is 10% of the video (30 s to 5 min) and cool-down 8% (30 s to 4 min), bo
 - If either drops below, the panel turns amber and the video keeps playing for **3 seconds**: the bike reports about once a second, and resistance two samples late. After that the video pauses on **PICK IT UP!** and resumes as soon as the rider is back at target.
 - When a segment raises the target, the rider gets **10 seconds** to turn the knob and spin up before the new target is enforced. A lower target applies at once. The panel shows the next segment in its last 15 seconds.
 - The program runs on video time, so it stops while the video is paused. Seeking moves through the program too.
-- **No bike.** If the bike isn't connected, the video holds on **WAITING FOR BIKE**, or **NO BIKE FOUND** on a device with no Peloton sensor service. Press OK, or tap the screen, to watch that video without exercise mode.
+- **No bike.** If the bike isn't connected, the video holds on **WAITING FOR BIKE**, or **NO BIKE FOUND** on a device with no Peloton sensor service. Press OK, or tap the card, to watch that video without exercise mode.
 
-The HUD draws the workout's profile across the top of the screen, with resistance as bar height and a playhead. A panel shows the segment, its time left, and cadence and resistance against the target.
+### The HUD and the player's controls
+
+The HUD (`RideHud`) has two styles, set by **Stats View**:
+- **Detailed:** the workout's profile across the top of the screen (resistance as bar height, with a playhead), and a panel with the segment, its time left, and cadence and resistance against the target, with bars.
+- **Minimal:** one slim bar with the time left and the two numbers against their targets, plus a thin progress line.
+
+**Stats Corner** puts the panel or bar in any corner. In a bottom corner it moves up clear of the seek bar while the controls show.
+
+Change both in **Exercise:Mode** (◄ ►), or during a ride: a tap on the video shows the player's controls, and with them a bar of buttons in the top corner away from the stats.
+
+| Button | What it does |
+|---|---|
+| **STATS** | Switches between Detailed and Minimal. |
+| **CORNER** | Moves the stats to the next corner. |
+| **✕ EXIT** | Stops the video, as BACK does, saving the position. This is the touch way out, because the tablet has no back button. |
+
+STATS and CORNER are saved, through `PlayerBridge.nativeSaveExerciseSetting`, so the next video starts the same way. Without exercise, only EXIT shows. The controls stay up for 5 seconds.
+
+The HUD covers the screen but takes no taps except on its "no bike" card, so the player's own controls work under it: seek, play/pause, and the gear menu (speed and audio track).
 
 ### Trying it without a bike
 

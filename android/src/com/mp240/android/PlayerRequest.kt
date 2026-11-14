@@ -49,6 +49,9 @@ class PlayerRequest(json: String) {
         val workout: Workout = Workout.fromLabel(o.optString("workout"))
         val difficulty: Difficulty = Difficulty.fromLabel(o.optString("difficulty"))
         val simulate: Boolean = o.optBoolean("simulate")
+        /** Exercise module's Stats View and Stats Corner, as their labels ("Minimal", "Top Right"). */
+        val statsStyle: RideHud.Style = RideHud.Style.fromLabel(o.optString("statsStyle"))
+        val statsCorner: RideHud.Corner = RideHud.Corner.fromLabel(o.optString("statsCorner"))
     }
 
     private fun strings(a: JSONArray?): List<String> =
