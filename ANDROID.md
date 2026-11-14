@@ -13,7 +13,7 @@ Android follows the desktop's design: the shell browses, then hands off to a ded
 | Piece | Where | What it does |
 |---|---|---|
 | `AndroidPlayerController` | `src/player/` | Stands in for `MpvController` under the same QML name (`mpvController`) and with the same API, so every module's Player view works unchanged. `loadAndPlay` sends the request to `PlayerActivity` over JNI; progress and the end of playback come back as `positionChanged` / `playbackEnded`, as from mpv. |
-| `PlayerActivity`, `RideHud` | `android/src/com/mp240/android/` | Media3 (ExoPlayer) playback, plus the exercise overlay and the ride gate. |
+| `PlayerActivity`, `RideHud` | `android/src/com/mp240/android/` | Media3 (ExoPlayer) playback, plus the exercise overlay and the ride gate. Files ExoPlayer can't decode carry on in `VlcPlayer` (libVLC); see [Formats ExoPlayer can't play](#formats-exoplayer-cant-play-the-vlc-fallback). |
 | `exercise-core` | `android/exercise-core/` | Plain Kotlin, unit tested on the JVM: difficulty levels, workout programs (`Program.build`) and the gate that decides whether the video may play (`RideGate`). |
 | bike library | `android/vendor/bike-core`, `android/vendor/bike` | soloton's library, vendored unchanged (`android/vendor/UPSTREAM`; refresh with `scripts/sync-bike-lib.sh`). It binds Peloton's own sensor service and reports cadence, power and resistance. |
 | Exercise module | `modules/exercise/`, `src/modules/exercise/` | The **Exercise:Mode** entry in the main menu. Its Ride Check screen shows the bike's live readings, holds the settings, previews the workout, and opens the bike library's diagnostics screen. |
@@ -100,6 +100,37 @@ Android 7 can't mount an SMB share without root, so the app speaks SMB itself, w
 
 **On a real gen 1 bike**, against an Unraid server on home Wi-Fi: sign-in and browsing work, with the server entered as `tower.local` (found by the mDNS fallback). Playback from the share hasn't been checked on the bike yet.
 
+## Formats ExoPlayer can't play: the VLC fallback
+
+The tablet's Android 7 decoders only handle MPEG-4 *Simple* Profile, and ExoPlayer has no Theora at all. So the files common in older collections don't play in ExoPlayer:
+
+| File | In ExoPlayer |
+|---|---|
+| XviD or DivX 5 AVI (MPEG-4 Advanced Simple Profile) | the decoder refuses it: "PVInitVideoDecoder failed" |
+| DivX 3 AVI | the video is dropped without an error, leaving only the sound |
+| MJPEG AVI | ExoPlayer's AVI reader crashes |
+| Theora `.ogv` | the container isn't recognised |
+
+These now carry on in [libVLC](https://code.videolan.org/videolan/vlc-android) (LGPL-2.1+), which decodes them in software.
+
+- **When it switches.** `PlayerActivity` switches to `VlcPlayer` at the same item and position when either of these happens:
+  - ExoPlayer reports a decoder error (`4xxx`), an unsupported or malformed container, or an unexpected crash in its extractor;
+  - a video file (judged by its extension) loads with no video track ExoPlayer can decode.
+
+  Network and HTTP errors don't switch, because VLC would fail too. Nor do streams that need request headers (Plex, Jellyfin, Emby), which VLC can't send.
+- **One player interface.** `VlcPlayer` is a media3 `SimpleBasePlayer`, so the ride gate, the HUD, the on-screen controls, seeking, resume and the progress reports to C++ all drive it as they drive ExoPlayer.
+  - It draws into libVLC's own `VLCVideoLayout` behind the `PlayerView`, which keeps only its controls. libVLC letterboxes the picture and renders sidecar subtitles itself.
+  - Decoding is in software, since the hardware decoders are what refused the file.
+- **Network shares.** VLC can't use the app's SMB connection, so `SmbHttpServer` serves the file over HTTP on 127.0.0.1, with byte ranges for seeking, reading through `SmbConnections`. That keeps sign-in, `.local` names and reconnects the same in both players.
+- **Logging.** The switch, and a failure in VLC too, are written to the Network Shares log (Diagnostics) for `smb://` files, and to logcat under `240mp.player` and `240mp.vlc`.
+
+**Build notes.**
+- libVLC **3.6.5** is the newest that fits Qt 6.4's toolchain: 3.7.x needs compileSdk 36 and Kotlin 2.2.
+- libVLC adds about 40 MB per ABI before compression.
+- It ships its own `libc++_shared.so`, and so does Qt (NDK 23, clang 12). An APK holds one per ABI, and it must be the newer, because code built against an older libc++ runs on a newer one but not the other way round:
+  - **arm64-v8a and x86_64:** libVLC's copy is newer (clang 18), so `android/build.gradle` deletes Qt's from androiddeployqt's build directory.
+  - **armeabi-v7a and x86:** libVLC's copy is older (clang 9), so `pickFirsts` keeps Qt's.
+
 ## Building
 
 ### Prerequisites
@@ -169,6 +200,7 @@ adb shell am start -n com.mp240.app/dev.soloton.bike.BikeDiagnosticsActivity
 - **Player.** mpv-only options are ignored on Android: the OSC mode, image slideshows (`imageContent`), extra mpv arguments and the transcode-offset display. Subtitle and audio cycle requests from mpv's OSC don't apply, because ExoPlayer's own controls switch tracks.
 - **Modules.** NFC Reader, Scripts, YouTube and Weather aren't available on Android.
 - **Network shares.** SMB2/3 only, one share at a time, and no server discovery: you type the address.
+- **VLC fallback.** It plays the first audio track and turns on the first subtitle file; mpv's audio and subtitle track choices aren't passed to it. Shuffle isn't supported in it.
 - **Resistance** is the bike library's spike-filtered value. soloton has not yet checked it on a real bike.
 
 **Emulator rendering.** If the emulator falls back to software GL (its log says `Switching to software rendering`), Qt Quick draws a diagonal tear across highlighted rows and the AppBar icon is blank. Start the emulator with `-gpu host` instead; on a GPU both draw correctly.
