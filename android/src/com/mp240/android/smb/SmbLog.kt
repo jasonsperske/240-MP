@@ -36,6 +36,11 @@ object SmbLog {
     @Synchronized
     fun text(): String = lines.joinToString("\n")
 
+    /** Whether [e] only says the reading thread was stopped (the player let go of the file), not a failure. */
+    fun isInterruption(e: Throwable): Boolean =
+        generateSequence(e) { it.cause.takeIf { c -> c !== it } }.take(12)
+            .any { it is InterruptedException || it is java.io.InterruptedIOException }
+
     /** [e] and its causes, outermost first, as "Class: message". */
     fun causes(e: Throwable): List<String> {
         val out = mutableListOf<String>()

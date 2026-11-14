@@ -57,8 +57,9 @@ FocusScope {
                 networkSharesBackend.clearPosition(playerRoot.filePath)
             else if (pos > 5000)
                 networkSharesBackend.savePosition(playerRoot.filePath, pos)
-            if (reason === "failed" && pos === 0) {
-                // Stay on screen to say so; any key goes back.
+            if (reason === "failed") {
+                // Stay on screen to say so, even if it failed partway (the position is kept);
+                // any key goes back. Diagnostics has the details.
                 playerRoot.errorMsg = "Couldn't play this file"
                 return
             }

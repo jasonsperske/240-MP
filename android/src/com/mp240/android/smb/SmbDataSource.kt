@@ -54,7 +54,7 @@ class SmbDataSource : BaseDataSource(/* isNetwork = */ true) {
             size = f.fileInformation.standardInformation.endOfFile
             SmbLog.add("Playing ${location.path} (${size / (1024 * 1024)} MB) from position ${dataSpec.position}")
         } catch (e: Exception) {
-            SmbLog.failure("Opening ${location.path} for playback failed: ${SmbConnections.describe(e)}", e)
+            if (!SmbLog.isInterruption(e)) SmbLog.failure("Opening ${location.path} for playback failed: ${SmbConnections.describe(e)}", e)
             throw DataSourceException(IOException(SmbConnections.describe(e), e), PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
         }
         if (dataSpec.position > size) {
@@ -92,7 +92,7 @@ class SmbDataSource : BaseDataSource(/* isNetwork = */ true) {
             // A read may return less than asked (the server's maximum read size); that's fine.
             f.read(buffer, position, 0, want)
         } catch (e: Exception) {
-            SmbLog.failure("Reading at $position failed: ${SmbConnections.describe(e)}", e)
+            if (!SmbLog.isInterruption(e)) SmbLog.failure("Reading at $position failed: ${SmbConnections.describe(e)}", e)
             throw DataSourceException(IOException(SmbConnections.describe(e), e), PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)
         }
     }
