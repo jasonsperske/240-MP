@@ -32,6 +32,20 @@
       "default": "Moderate"
     },
     {
+      "key": "stats_style",
+      "label": "Stats View",
+      "type": "list_single",
+      "options": ["Detailed", "Minimal"],
+      "default": "Detailed"
+    },
+    {
+      "key": "stats_corner",
+      "label": "Stats Corner",
+      "type": "list_single",
+      "options": ["Top Left", "Top Right", "Bottom Left", "Bottom Right"],
+      "default": "Top Left"
+    },
+    {
       "key": "simulate_bike",
       "label": "Simulated Bike",
       "type": "toggle",

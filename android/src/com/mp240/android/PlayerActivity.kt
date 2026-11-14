@@ -15,6 +15,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
@@ -50,6 +51,10 @@ import java.io.File
  * refuse XviD and DivX AVIs, it has no Theora at all), the same item carries on in [VlcPlayer]
  * from where it was, which decodes them in software; see [fallBackToVlc].
  *
+ * Touch: a tap shows the player's controls, and with them a bar of buttons in the top corner away
+ * from the ride's stats: EXIT, and while exercising STATS (Detailed/Minimal) and CORNER (where the
+ * stats sit). Those two are saved, as the exercise module's Stats View and Stats Corner settings.
+ *
  * Keys (a remote, a gamepad, the Qt side's key map): BACK/ESC stop; OK/ENTER/SPACE play and pause;
  * LEFT/RIGHT seek 10 s. With the simulated bike, UP/DOWN change cadence and [ ] or PAGE UP/DOWN
  * resistance.
@@ -64,6 +69,9 @@ class PlayerActivity : Activity() {
     private lateinit var playerView: PlayerView
     private lateinit var hud: RideHud
     private lateinit var skipButton: TextView
+    private lateinit var buttonBar: LinearLayout
+    private lateinit var statsButton: TextView
+    private lateinit var cornerButton: TextView
 
     private val handler = Handler(Looper.getMainLooper())
     private var ended = false
@@ -113,14 +121,24 @@ class PlayerActivity : Activity() {
             player = GatedPlayer(exo)
             setShowBuffering(PlayerView.SHOW_BUFFERING_WHEN_PLAYING)
             setBackgroundColor(Color.BLACK)
-            controllerShowTimeoutMs = 3_000
+            // Long enough to reach EXIT, STATS or CORNER mid-ride.
+            controllerShowTimeoutMs = 5_000
             keepScreenOn = true
         }
         hud = RideHud(this, loadFont(request.fontPath)).apply {
             visibility = if (request.exercise.enabled) View.VISIBLE else View.GONE
+            style = request.exercise.statsStyle
+            corner = request.exercise.statsCorner
             // A tap on the "bike not connected" card is the touch way to watch without a bike.
-            setOnClickListener { if (lastStatus?.shortfall == RideGate.Shortfall.NO_BIKE) waiveExercise() else playerView.showController() }
+            // Every other tap passes through the HUD to the player's controls.
+            onCardTap = { if (lastStatus?.shortfall == RideGate.Shortfall.NO_BIKE) waiveExercise() }
         }
+        buildButtonBar()
+        playerView.setControllerVisibilityListener(PlayerView.ControllerVisibilityListener { visibility ->
+            val shown = visibility == View.VISIBLE
+            buttonBar.visibility = if (shown) View.VISIBLE else View.GONE
+            hud.controlsShown = shown
+        })
         skipButton = TextView(this).apply {
             text = "SKIP ▶"
             typeface = hud.typeface
@@ -136,6 +154,7 @@ class PlayerActivity : Activity() {
         root.addView(vlcLayout, FrameLayout.LayoutParams(-1, -1))
         root.addView(playerView, FrameLayout.LayoutParams(-1, -1))
         root.addView(hud, FrameLayout.LayoutParams(-1, -1))
+        root.addView(buttonBar, buttonBarLayout())
         root.addView(skipButton, FrameLayout.LayoutParams(-2, -2, Gravity.BOTTOM or Gravity.END).apply { setMargins(0, 0, 48, 160) })
         setContentView(root)
 
@@ -235,6 +254,69 @@ class PlayerActivity : Activity() {
             finishWith(REASON_FAILED)
         }
     }
+
+    // ── Buttons shown with the controls ───────────────────────────────────────────────────────
+
+    private fun buildButtonBar() {
+        fun button(onTap: () -> Unit) = TextView(this).apply {
+            typeface = hud.typeface
+            setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, unit() * 3.4f)
+            setTextColor(Color.WHITE)
+            setBackgroundColor(0xCC0A0094.toInt())
+            val pad = (unit() * 1.6f).toInt()
+            setPadding(pad * 2, pad, pad * 2, pad)
+            setOnClickListener {
+                onTap()
+                playerView.showController() // keep the controls up while the rider is choosing
+            }
+        }
+        statsButton = button {
+            hud.style = if (hud.style == RideHud.Style.DETAILED) RideHud.Style.MINIMAL else RideHud.Style.DETAILED
+            PlayerBridge.nativeSaveExerciseSetting("stats_style", hud.style.label)
+            updateButtons()
+        }
+        cornerButton = button {
+            val corners = RideHud.Corner.values()
+            hud.corner = corners[(hud.corner.ordinal + 1) % corners.size]
+            PlayerBridge.nativeSaveExerciseSetting("stats_corner", hud.corner.label)
+            updateButtons()
+        }
+        val exitButton = button { finishWith(REASON_STOPPED) }.apply { text = "✕ EXIT" }
+        buttonBar = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            visibility = View.GONE
+            val gap = (unit() * 1.5f).toInt()
+            fun add(v: View) = addView(v, LinearLayout.LayoutParams(-2, -2).apply { marginStart = gap })
+            add(statsButton)
+            add(cornerButton)
+            add(exitButton)
+        }
+        updateButtons()
+    }
+
+    /** The buttons' labels, which ones apply, and the bar's corner: the top one away from the stats. */
+    private fun updateButtons() {
+        statsButton.text = "STATS: ${hud.style.label.uppercase()}"
+        cornerButton.text = "CORNER: ${hud.corner.label.uppercase()}"
+        val stats = if (exercising) View.VISIBLE else View.GONE
+        statsButton.visibility = stats
+        cornerButton.visibility = stats
+        if (buttonBar.parent != null) buttonBar.layoutParams = buttonBarLayout()
+    }
+
+    private fun buttonBarLayout(): FrameLayout.LayoutParams {
+        val u = unit()
+        val awayFromStats = if (exercising && !hud.corner.left) Gravity.START else Gravity.END
+        return FrameLayout.LayoutParams(-2, -2, Gravity.TOP or awayFromStats).apply {
+            // Below the ride profile, when it is showing.
+            topMargin = (u * if (exercising && hud.style == RideHud.Style.DETAILED) 7.5f else 2f).toInt()
+            marginStart = (u * 2f).toInt()
+            marginEnd = (u * 2f).toInt()
+        }
+    }
+
+    /** One percent of the screen's height, the HUD's unit. */
+    private fun unit(): Float = resources.displayMetrics.let { maxOf(minOf(it.widthPixels, it.heightPixels), 1) } / 100f
 
     // ── VLC fallback ──────────────────────────────────────────────────────────────────────────
 
@@ -340,6 +422,7 @@ class PlayerActivity : Activity() {
     private fun waiveExercise() {
         exerciseWaived = true
         Log.i(TAG, "rider chose to watch without the bike")
+        updateButtons()
         applyPlayWhenReady()
     }
 

@@ -39,6 +39,19 @@ void JNICALL nativeSkipRequested(JNIEnv *, jclass, jint session) {
     onController([=](AndroidPlayerController *c) { c->onSkipRequested(session); });
 }
 
+QString fromJString(JNIEnv *env, jstring s) {
+    const char *chars = env->GetStringUTFChars(s, nullptr);
+    const QString out = QString::fromUtf8(chars);
+    env->ReleaseStringUTFChars(s, chars);
+    return out;
+}
+
+void JNICALL nativeSaveExerciseSetting(JNIEnv *env, jclass, jstring key, jstring value) {
+    const QString k = fromJString(env, key);
+    const QString v = fromJString(env, value);
+    onController([=](AndroidPlayerController *c) { c->saveExerciseSetting(k, v); });
+}
+
 QJsonArray toArray(const QStringList &l) { return QJsonArray::fromStringList(l); }
 
 // A toggle setting: "ON"/"OFF" as Settings writes them (case-insensitively), or the default.
@@ -62,9 +75,10 @@ AndroidPlayerController::AndroidPlayerController(const QString &appRoot, AppCore
         {"nativeProgress", "(IIII)V", reinterpret_cast<void *>(nativeProgress)},
         {"nativeEnded", "(IIILjava/lang/String;)V", reinterpret_cast<void *>(nativeEnded)},
         {"nativeSkipRequested", "(I)V", reinterpret_cast<void *>(nativeSkipRequested)},
+        {"nativeSaveExerciseSetting", "(Ljava/lang/String;Ljava/lang/String;)V", reinterpret_cast<void *>(nativeSaveExerciseSetting)},
     };
     QJniEnvironment env;
-    if (!env.registerNativeMethods(kBridge, methods, 3))
+    if (!env.registerNativeMethods(kBridge, methods, 4))
         qWarning("[AndroidPlayer] could not register PlayerBridge natives — playback reports will be lost");
 }
 
@@ -114,6 +128,10 @@ void AndroidPlayerController::loadAndPlay(const QString &url, float startSeconds
                         m_appCore->get_setting(kExerciseModule, QStringLiteral("difficulty")).toString());
         exercise.insert(QStringLiteral("simulate"),
                         toggleOn(m_appCore->get_setting(kExerciseModule, QStringLiteral("simulate_bike")), false));
+        exercise.insert(QStringLiteral("statsStyle"),
+                        m_appCore->get_setting(kExerciseModule, QStringLiteral("stats_style")).toString());
+        exercise.insert(QStringLiteral("statsCorner"),
+                        m_appCore->get_setting(kExerciseModule, QStringLiteral("stats_corner")).toString());
     }
 
     QStringList urls{url};
@@ -159,6 +177,14 @@ void AndroidPlayerController::seekTo(int positionMs) {
 
 void AndroidPlayerController::showOsdSkipPrompt() {
     QJniObject::callStaticMethod<void>(kBridge, "showSkipPrompt", "(Z)V", jboolean(true));
+}
+
+// The rider changed how the ride's stats are shown from the player (Stats View, Stats Corner);
+// kept so the next video starts the same way. Only those two keys are accepted.
+void AndroidPlayerController::saveExerciseSetting(const QString &key, const QString &value) {
+    if (!m_appCore) return;
+    if (key != QLatin1String("stats_style") && key != QLatin1String("stats_corner")) return;
+    m_appCore->save_setting(kExerciseModule, key, value);
 }
 
 void AndroidPlayerController::onSkipRequested(int session) {

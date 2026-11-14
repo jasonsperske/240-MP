@@ -17,13 +17,20 @@ FocusScope {
 
     readonly property var workouts: ["Steady", "Intervals", "Hills", "Spin Class"]
     readonly property var difficulties: ["Easy", "Moderate", "Hard", "Expert"]
+    readonly property var statsStyles: ["Detailed", "Minimal"]
+    readonly property var statsCorners: ["Top Left", "Top Right", "Bottom Left", "Bottom Right"]
     readonly property int previewMinutes: 30
 
-    // Rows: 0 exercise mode, 1 workout, 2 difficulty, 3 bike diagnostics
+    // Rows: 0 exercise mode, 1 workout, 2 difficulty, 3 stats view, 4 stats corner, 5 bike diagnostics
+    readonly property int rowCount: 6
+    readonly property int diagnosticsRow: 5
     property int focusRow: 0
     property bool exerciseOn: true
     property string workout: "Steady"
     property string difficulty: "Moderate"
+    // How the ride's numbers show over the video (RideHud), also switchable in the player.
+    property string statsStyle: "Detailed"
+    property string statsCorner: "Top Left"
     property var preview: ({})
     readonly property int segmentCount: preview.segments ? preview.segments.length : 0
 
@@ -54,6 +61,12 @@ FocusScope {
             difficulty = cycle(difficulties, difficulty, direction)
             appCore.save_setting(moduleRoot.moduleId, "difficulty", difficulty)
             refreshPreview()
+        } else if (focusRow === 3) {
+            statsStyle = cycle(statsStyles, statsStyle, direction)
+            appCore.save_setting(moduleRoot.moduleId, "stats_style", statsStyle)
+        } else if (focusRow === 4) {
+            statsCorner = cycle(statsCorners, statsCorner, direction)
+            appCore.save_setting(moduleRoot.moduleId, "stats_corner", statsCorner)
         }
     }
 
@@ -61,6 +74,8 @@ FocusScope {
         exerciseOn = toggleValue(appCore.get_setting(moduleRoot.moduleId, "exercise_mode"), true)
         workout = appCore.get_setting(moduleRoot.moduleId, "workout") || "Steady"
         difficulty = appCore.get_setting(moduleRoot.moduleId, "difficulty") || "Moderate"
+        statsStyle = appCore.get_setting(moduleRoot.moduleId, "stats_style") || "Detailed"
+        statsCorner = appCore.get_setting(moduleRoot.moduleId, "stats_corner") || "Top Left"
         if (navListState.focusRow !== undefined) focusRow = navListState.focusRow
         refreshPreview()
         exerciseBackend.startMonitoring()
@@ -71,15 +86,15 @@ FocusScope {
         if (event.key === Qt.Key_Escape || event.key === Qt.Key_Backspace || event.key === Qt.Key_Back) {
             goBack()
         } else if (event.key === Qt.Key_Up) {
-            focusRow = (focusRow + 3) % 4
+            focusRow = (focusRow + rowCount - 1) % rowCount
         } else if (event.key === Qt.Key_Down) {
-            focusRow = (focusRow + 1) % 4
+            focusRow = (focusRow + 1) % rowCount
         } else if (event.key === Qt.Key_Left) {
             change(-1)
         } else if (event.key === Qt.Key_Right) {
             change(1)
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            if (focusRow === 3) exerciseBackend.openDiagnostics()
+            if (focusRow === diagnosticsRow) exerciseBackend.openDiagnostics()
             else change(1)
         } else {
             return
@@ -99,7 +114,7 @@ FocusScope {
     Item {
         id: body
         anchors.top: parent.top
-        anchors.topMargin: root.sh * 0.23
+        anchors.topMargin: root.sh * 0.21
         anchors.horizontalCenter: parent.horizontalCenter
         width: root.sw * 0.76875
         height: root.sh * 0.6
@@ -149,7 +164,7 @@ FocusScope {
                         text: exerciseBackend.live ? modelData.value : "--"
                         color: root.primaryColor
                         font.family: root.globalFont
-                        font.pixelSize: root.sh * 0.0833333
+                        font.pixelSize: root.sh * 0.065
                     }
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -176,11 +191,13 @@ FocusScope {
                     { label: "Exercise Mode", value: checkRoot.exerciseOn ? "ON" : "OFF", arrows: true },
                     { label: "Workout", value: checkRoot.workout, arrows: true },
                     { label: "Difficulty", value: checkRoot.difficulty, arrows: true },
+                    { label: "Stats View", value: checkRoot.statsStyle, arrows: true },
+                    { label: "Stats Corner", value: checkRoot.statsCorner, arrows: true },
                     { label: "Bike Diagnostics", value: "", arrows: false }
                 ]
                 Item {
                     width: rows.width
-                    height: root.sh * 0.0583333
+                    height: root.sh * 0.05
                     readonly property bool focused: checkRoot.focusRow === index
 
                     Rectangle {
@@ -195,7 +212,7 @@ FocusScope {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: root.sw * 0.009375
-                        font.pixelSize: root.sh * 0.0416667
+                        font.pixelSize: root.sh * 0.037
                     }
                     Text {
                         text: modelData.arrows ? "◄ " + modelData.value + " ►" : ""
@@ -205,7 +222,7 @@ FocusScope {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: root.sw * 0.009375
-                        font.pixelSize: root.sh * 0.0416667
+                        font.pixelSize: root.sh * 0.037
                     }
                 }
             }
@@ -215,7 +232,7 @@ FocusScope {
         Text {
             id: previewLabel
             anchors.top: rows.bottom
-            anchors.topMargin: root.sh * 0.025
+            anchors.topMargin: root.sh * 0.012
             text: checkRoot.exerciseOn
                 ? "A " + checkRoot.previewMinutes + " min video: " + segmentCount + (segmentCount === 1 ? " segment" : " segments")
                 : "Exercise mode is off: videos play without the bike"
@@ -233,7 +250,7 @@ FocusScope {
             anchors.topMargin: root.sh * 0.0145833
             anchors.left: parent.left
             anchors.right: parent.right
-            height: root.sh * 0.09
+            height: root.sh * 0.06
             opacity: checkRoot.exerciseOn ? 1.0 : 0.3
             readonly property real lengthMs: preview.lengthMs || 1
 

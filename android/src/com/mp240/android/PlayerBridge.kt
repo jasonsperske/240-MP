@@ -53,4 +53,7 @@ object PlayerBridge {
 
     /** The rider took the skip prompt (Plex's "skip intro"). */
     @JvmStatic external fun nativeSkipRequested(session: Int)
+
+    /** The rider changed Stats View ("stats_style") or Stats Corner ("stats_corner") in the player; C++ saves it. */
+    @JvmStatic external fun nativeSaveExerciseSetting(key: String, value: String)
 }
